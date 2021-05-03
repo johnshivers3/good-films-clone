@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING(100),
       allowNull: false,
     },
-    director: { 
-      type:DataTypes.STRING(50),
+    directors: { 
+      type:DataTypes.STRING(100),
       allowNull: false,
     },
     description: { 

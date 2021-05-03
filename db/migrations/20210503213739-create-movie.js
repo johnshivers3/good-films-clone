@@ -12,9 +12,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(100)
       },
-      director: {
+      directors: {
         allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING(100)
       },
       description: {
         allowNull: false,
