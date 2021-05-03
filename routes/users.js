@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser } = require('../auth');
 
 const router = express.Router();
 
@@ -135,7 +135,7 @@ router.post('/login', csrfProtection, loginValidators,
         if (passwordMatch) {
           // If the password hashes match, then login the user
           // and redirect them to the default route.
-          loginUser(req, res, user);
+          await loginUser(req, res, user);
           return res.redirect('/');
         }
       }
@@ -153,5 +153,10 @@ router.post('/login', csrfProtection, loginValidators,
       csrfToken: req.csrfToken(),
     });
   }));
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/users/login');
+});
 
 module.exports = router;
