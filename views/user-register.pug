@@ -1,18 +1,42 @@
 extends layout.pug
 
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/user-register.css")
+  //- add page specific js
+  //- script(src="/javascripts/index.js" type="module" defer)
+
 include utils.pug
 
 block content
   +validationErrorSummary(errors)
-  form(action='/users/register' method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('First Name', 'firstName', user.firstName)
-    +field('Last Name', 'lastName', user.lastName)
-    +field('Email Address', 'emailAddress', user.emailAddress)
-    +field('Password', 'password', user.password, 'password')
-    +field('Confirm Password', 'confirmPassword', '', 'password')
-    div
-      button(type='submit') Register
-      a(href='/') Cancel
-  div
-    p: a(href='/users/login') Already have an account?
+  .register-form-container
+    form(action='/users/register' method='post')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      +field('First Name', 'firstName', user.firstName)
+      +field('Last Name', 'lastName', user.lastName)
+      +field('Email Address', 'emailAddress', user.emailAddress)
+      +field('Password', 'password', user.password, 'password')
+      +field('Confirm Password', 'confirmPassword', '', 'password')
+      div.button-div
+        button(type='submit') Register
+        button(type='button' onclick="window.location='/'") Cancel
+  .triple-info-section
+    .info-section
+      h3 Personalized Collections
+      ul 
+        li Make your own movie collections and share with your friends! 
+        li Like someone's review? Check out their collections for new movies. 
+    .info-section
+      h3 Reviews
+      ul 
+        li Keep track of movies you love by writing reviews. 
+        li Don't wanna write a description? Simply click on a star and only give it a rating! 
+    .info-section
+      h3 Find new movies
+      ul 
+        li Look through movies by genre to find a new favorite.
+        li Check back to the main page for added movies. 
+    
+
+
