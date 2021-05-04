@@ -5,9 +5,10 @@ html
     block head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    title Good Films - #{title}
+    link(rel="stylesheet" href="/stylesheets/layout.css")
+    title(class = 'title') Good Films - #{title}
   body
-    nav
+    nav(class = 'navbar')
       a(href='/') Good Films
       div(id='navbarText')
         div
@@ -28,7 +29,7 @@ html
               +field('Password', 'password', null, 'password')
               button(type='submit' class='loginBtn') Login
             //- a(href='/users/login') Login
-            //- a(href='/users/register') Register
+            a(href='/users/register') Register
     div
       h2 #{title}
       block content
