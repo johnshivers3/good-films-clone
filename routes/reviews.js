@@ -10,11 +10,15 @@ const { ContextHandlerImpl } = require('express-validator/src/chain');
 const router = express.Router();
 
 
-router.get('/create', csrfProtection, (req, res) => {
+router.get('/', csrfProtection, (req, res) => {
     const review = db.Review.build();
+    const movieId = parseInt(req.params.id, 10);
+    const userId = parseInt(res.locals.user.id, 10);
     res.render('create-review', {
         title: 'Create Review',
         review,
+        movieId,
+        userId,
         csrfToken: req.csrfToken(),
     });
 });

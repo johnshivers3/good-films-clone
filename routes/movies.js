@@ -7,7 +7,11 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
 const { ContextHandlerImpl } = require('express-validator/src/chain');
 
+const reviewsRouter = require('./reviews')
+
 const router = express.Router();
+
+router.use('/:id/reviews', reviewsRouter);
 
 
 router.get('/:id', asyncHandler( async (req, res) => {
