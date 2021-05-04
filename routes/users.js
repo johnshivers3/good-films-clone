@@ -98,7 +98,7 @@ router.post('/register', csrfProtection, userValidators,
   }));
 
 router.get('/login', csrfProtection, (req, res) => {
-  res.render('user-login', {
+  res.render('layout', {
     title: 'Login',
     csrfToken: req.csrfToken(),
   });
@@ -146,7 +146,7 @@ router.post('/login', csrfProtection, loginValidators,
       errors = validatorErrors.array().map((error) => error.msg);
     }
 
-    res.render('layout', {
+    res.render('index', {
       title: 'Login',
       emailAddress,
       errors,
