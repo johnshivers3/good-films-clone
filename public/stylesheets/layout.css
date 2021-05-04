@@ -2,6 +2,30 @@ h1 {
     color: #555555;
 }
 
-body {
-    background-color: rgb(49, 48, 48)
+body { 
+    background-color: rgb(105, 87, 63);
+    font-family: monospace;
+
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 100px;
+    background-color:tan;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.loginForm{
+    padding: 15px;
+    padding-right: 25px;
+    flex-direction: column;
+}
+
+.form{
+    align-content: space-between;
 }

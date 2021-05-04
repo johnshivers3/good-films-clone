@@ -1,7 +1,7 @@
 doctype html
 html
   head
-  include utils.pug
+    include utils.pug
     block head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
@@ -9,17 +9,17 @@ html
     title(class = 'title') Good Films - #{title}
   body
     nav(class = 'navbar')
-      a(href='/') Good Films
-      div(id='navbarText')
+      img(src="/Images/logo.png" alt="logo" href='/')
+      div(class='form')
         div
           //- Empty menu keeps the content that follows the
           //- unordered list correctly positioned on the
           //- right side of the navbar.
         if locals.authenticated
-          span(class= 'welcome') Welcome #{user.firstName}!
-          form(action='/users/logout' method='post' class= 'logoutForm')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            button(type='submit' class='logoutBtn') Logout
+          span(class='welcome') Welcome #{user.firstName}!
+            form(action='/users/logout' method='post' class='logoutForm')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              button(type='submit' class='logoutBtn') Logout
         else
           span
             +validationErrorSummary(errors)
@@ -28,8 +28,8 @@ html
               +field('Email Address', 'emailAddress', emailAddress)
               +field('Password', 'password', null, 'password')
               button(type='submit' class='loginBtn') Login
-            //- a(href='/users/login') Login
-            a(href='/users/register') Register
+              span
+                button(type='button' onclick="window.location='/users/register'" ) Register
     div
       h2 #{title}
       block content
