@@ -9,7 +9,8 @@ html
     title(class = 'title') Good Films - #{title}
   body
     nav(class = 'navbar')
-      img(src="/Images/logo.png" alt="logo" href='/')
+      a(href='/')
+        img(src="/Images/logo.png" alt="logo" class="logoImg")
       div(class='form')
         div
           //- Empty menu keeps the content that follows the
@@ -29,7 +30,7 @@ html
               +field('Password', 'password', null, 'password')
               button(type='submit' class='loginBtn') Login
               span
-                button(type='button' onclick="window.location='/users/register'" ) Register
+                button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
     div
       h2 #{title}
       block content

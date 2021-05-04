@@ -2,9 +2,38 @@ extends layout
 
 append head
   //- add page specific styles by appending to the head
-  //- link(rel="stylesheet" href="/stylesheets/layout.css")
+  link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
+  div
+    h1 Documentary
+      div(class="docu")
+          img(src="/Images/freeSolo.jpg" alt="Free Solo" class="freeSolo")
+          img(src="/Images/icarus.jpg" alt="ICARUS" class="icarus")
+          img(src="/Images/lastDance.jpg" alt="Last Dance" class="lastDance")
+          img(src="/Images/myOctopusTeacher.jpg" alt="My Octopus Teacher" class="myOT")
+          img(src="/Images/theSocialDilemma.jpg" alt="The Social Dilemma" class="tSD")
+    h1 Horror
+      div(class="horror")
+          img(src="/Images/alien_.jpg" alt="Alien" class="alien")
+          img(src="/Images/apartment143.jpg" alt="Apartment 143" class="a143")
+          img(src="/Images/it.jpg" alt="It" class="it")
+          img(src="/Images/sinister.jpg" alt="Sinister" class="sinister")
+          img(src="/Images/conjuring.jpg" alt="The Conjuring" class="conjur")
+    h1 Action
+      div(class="action")
+          img(src="/Images/Blade.jpg" alt="Blade" class="blade")
+          img(src="/Images/Constantine.jpg" alt="Constantine" class="const")
+          img(src="/Images/HannibalRising.jpg" alt="Hannibal Rising" class="hanibal")
+          img(src="/Images/Se7en.jpg" alt="Se7en" class="seven")
+          img(src="/Images/MortalKombat.jpg" alt="MortalKombat" class="MK")
+    h1 Comedy 
+      div(class="comedy")
+          img(src="/Images/HomeAlone.jpg" alt="Home Alone" class="homelone")
+          img(src="/Images/BruceAlmighty.jpg" alt="Bruce Almighty" class="Bruce")
+          img(src="/Images/RushHour2.jpg" alt="Rush Hour 2" class="rh2")
+          img(src="/Images/Ted.jpg" alt="Ted" class="ted")
+          img(src="/Images/SpaceBalls.jpg" alt="Space Balls" class="spaceBalls")
   

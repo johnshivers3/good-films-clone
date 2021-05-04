@@ -1,0 +1,41 @@
+h1{
+    color: black
+}
+
+
+.docu,
+.horror,
+.action,
+.comedy {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 35px;
+    border: 1px solid black ;
+}
+
+.freeSolo,
+.icarus,
+.lastDance,
+.myOT,
+.tSD,
+.alien,
+.a143,
+.it,
+.sinister,
+.conjur,
+.blade,
+.const,
+.hanibal,
+.seven,
+.MK,
+.homelone,
+.Bruce,
+.rh2,
+.ted,
+.spaceBalls{
+    padding: 5px;
+    width: 75px;
+    height: 125px;
+}
+
