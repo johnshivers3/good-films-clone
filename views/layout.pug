@@ -1,6 +1,7 @@
 doctype html
 html
   head
+  include utils.pug
     block head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
@@ -9,18 +10,25 @@ html
     nav
       a(href='/') Good Films
       div(id='navbarText')
-        ul
-          //- Empty menu keeps the content that follows the
-          //- unordered list correctly positioned on the
-          //- right side of the navbar.
-        if locals.authenticated
-          span Welcome #{user.firstName}!
-          form(action='/users/logout' method='post')
-            button(type='submit') Logout
-        else
-          span
-            a(href='/users/login') Login
-            a(href='/users/register') Register
+          div
+              +validationErrorSummary(errors)
+              form(action='/users/login' method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                +field('Email Address', 'emailAddress', emailAddress)
+                +field('Password', 'password', null, 'password')
+                button(type='submit' class='btn btn-primary') Login
+          ul
+            //- Empty menu keeps the content that follows the
+            //- unordered list correctly positioned on the
+            //- right side of the navbar.
+          if locals.authenticated
+            span Welcome #{user.firstName}!
+            form(action='/users/logout' method='post')
+              button(type='submit') Logout
+          else
+            span
+              a(href='/users/login') Login
+              a(href='/users/register') Register
     div
       h2 #{title}
       block content
