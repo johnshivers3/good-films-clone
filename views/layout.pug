@@ -11,23 +11,22 @@ html
       a(href='/') Good Films
       div(id='navbarText')
         div
-        ul
           //- Empty menu keeps the content that follows the
           //- unordered list correctly positioned on the
           //- right side of the navbar.
         if locals.authenticated
-          span Welcome #{user.firstName}!
-          form(action='/users/logout' method='post')
+          span(class= 'welcome') Welcome #{user.firstName}!
+          form(action='/users/logout' method='post' class= 'logoutForm')
             input(type='hidden' name='_csrf' value=csrfToken)
-            button(type='submit') Logout
+            button(type='submit' class='logoutBtn') Logout
         else
           span
             +validationErrorSummary(errors)
-            form(action='/users/login' method='post')
+            form(action='/users/login' method='post' class='loginForm')
               input(type='hidden' name='_csrf' value=csrfToken)
               +field('Email Address', 'emailAddress', emailAddress)
               +field('Password', 'password', null, 'password')
-              button(type='submit' class='btn btn-primary') Login
+              button(type='submit' class='loginBtn') Login
             //- a(href='/users/login') Login
             //- a(href='/users/register') Register
     div
