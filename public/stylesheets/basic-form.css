@@ -1,0 +1,49 @@
+.body-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.body-form {
+  border: 1px solid black;
+  padding: 10px;
+  padding-top: 15px;
+  box-shadow: 4px 4px 3px 2px rgba(199, 109, 199, 0.575);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+input {
+  margin: 3px;
+  font-size: large;
+}
+
+.button-div {
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin: 2px;
+  font-size: medium;
+}
+
+.triple-info-section {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.info-section {
+  border: .5px solid lightcoral;
+  padding: 4px;
+  max-width: 31%;
+}
+
+h3 {
+  text-align: center;
+}
