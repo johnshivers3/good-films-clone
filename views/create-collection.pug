@@ -1,0 +1,17 @@
+extends layout.pug
+
+append head
+    link(rel="stylesheet" href="/stylesheets/user-register.css")
+    include utils.pug
+
+block content
+    +validationErrorSummary(errors)
+    .collectionForm
+    form(action=`/collection/` method='post')
+        h1= `Make a Collection`
+        div
+        input(type="text" name='name' value='name' placeholder='name')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type='hidden' name='movieId' value=movieId)
+        input(type='hidden' name='userId' value=userId)
+        button(type='submit') Submit

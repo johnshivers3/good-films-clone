@@ -12,7 +12,7 @@ const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies')
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
-
+const collectionRouter = require('./routes/collection')
 const app = express();
 
 // view engine setup
@@ -45,6 +45,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // app.use('/reviews', reviewsRouter);
 app.use('/movies', moviesRouter);
+app.use('/', collectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
