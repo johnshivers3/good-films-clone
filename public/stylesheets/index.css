@@ -7,6 +7,8 @@ h1{
 .horror,
 .action,
 .comedy {
+    height: 150px;
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -39,3 +41,29 @@ h1{
     height: 125px;
 }
 
+.freeSolo:hover,
+.icarus:hover,
+.lastDance:hover,
+.myOT:hover,
+.tSD:hover,
+.alien:hover,
+.a143:hover,
+.it:hover,
+.sinister:hover,
+.conjur:hover,
+.blade:hover,
+.const:hover,
+.hanibal:hover,
+.seven:hover,
+.MK:hover,
+.homelone:hover,
+.Bruce:hover,
+.rh2:hover,
+.ted:hover,
+.spaceBalls:hover{
+    width:125px;
+    height:200px;
+    transition: 1;
+    margin: 0;
+    padding: 0;
+}
