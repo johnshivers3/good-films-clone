@@ -7,7 +7,7 @@ h1{
 .horror,
 .action,
 .comedy {
-    height: 150px;
+    height: 200px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -66,4 +66,16 @@ h1{
     transition: 1;
     margin: 0;
     padding: 0;
+}
+
+.asd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: small;
+}
+
+h2{
+    font-weight: bold;
+    font-size: 14px;
 }
