@@ -2,7 +2,7 @@ extends layout.pug
 
 append head
   //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/user-register.css")
+  link(rel="stylesheet" href="/stylesheets/basic-form.css")
   //- add page specific js
   //- script(src="/javascripts/index.js" type="module" defer)
 
@@ -10,22 +10,22 @@ include utils.pug
 
 block content
     +validationErrorSummary(errors)
-    .register-form-container
-    form(action=`/movies/` method='post')
-        h4= `Movie: ${movieTitle}`
-        textarea(name="content", cols="30", rows="10" placeholder='Write your review here!')
-        div
-            label(for="rating") Rating 
-            select(type="dropdown" name='rating') 
-                option(value=1) 1
-                option(value=2) 2
-                option(value=3) 3
-                option(value=4) 4
-                option(value=5) 5
-        input(type='hidden' name='_csrf' value=csrfToken)
-        input(type='hidden' name='movieId' value=movieId)
-        input(type='hidden' name='userId' value=userId)
-        button(type='submit') Submit
+    .body-form-container
+      form(action=`/movies/` method='post' class='body-form')
+          h4= `Movie: ${movieTitle}`
+          textarea(name="content", cols="50", rows="10" placeholder='Write your review here!')
+          div
+              label(for="rating") Rating 
+              select(type="dropdown" name='rating') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+          input(type='hidden' name='_csrf' value=csrfToken)
+          input(type='hidden' name='movieId' value=movieId)
+          input(type='hidden' name='userId' value=userId)
+          button(type='submit') Submit
 
 
 
