@@ -21,7 +21,7 @@ const reviewValidators = [
     check('name')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a name for your collection.')
-        .isLength({ min: 255 })
+        .isLength({ max: 255 })
         .withMessage('Name of collection must not be more than 255 characters long'),
 ];
 
