@@ -10,14 +10,16 @@ const { ContextHandlerImpl } = require('express-validator/src/chain');
 const router = express.Router();
 
 
-router.get('/', csrfProtection, (req, res) => {
+router.get('/:id/:title/reviews', csrfProtection, (req, res) => {
     const review = db.Review.build();
     const movieId = parseInt(req.params.id, 10);
     const userId = parseInt(res.locals.user.id, 10);
+    const movieTitle = req.params.title;
     res.render('create-review', {
         title: 'Create Review',
         review,
         movieId,
+        movieTitle,
         userId,
         csrfToken: req.csrfToken(),
     });
@@ -32,13 +34,12 @@ const reviewValidators = [
     check('rating')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a value for Last Name')
-        .isLength({ min: 1 , max: 5})
-        .withMessage('Rating must be between 1 and 5')
+        // .isLength({ min: 1 , max: 5})
+        // .withMessage('Rating must be between 1 and 5')
 ];
 
-router.post('/'), csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
-    const { content, rating, movieId} = req.body;
-    const userId = req.locals.user.id;
+router.post('/:id/:title/reviews'), csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
+    const { content, rating, movieId, userId} = req.body;
 
     const review = db.Review.build({
         content,
@@ -46,6 +47,8 @@ router.post('/'), csrfProtection, reviewValidators, asyncHandler( async (req, re
         movieId,
         userId
     });
+
+    console.log('________________________________________________________aksdjfj fsd j;alskd fja;lsdk fjks;dlfjk______')
 
     const validatorErrors = validationResult(req);
 

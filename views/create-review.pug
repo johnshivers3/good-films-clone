@@ -11,9 +11,9 @@ include utils.pug
 block content
     +validationErrorSummary(errors)
     .register-form-container
-    form(action='/reviews' method='post')
-        h4 Movie: Example Movie
-        textarea(name="description", cols="30", rows="10" placeholder='Write your review here!')
+    form(action=`/movies/${movieId}/${movieTitle}/reviews` method='post')
+        h4= `Movie: ${movieTitle}`
+        textarea(name="content", cols="30", rows="10" placeholder='Write your review here!')
         div
             label(for="rating") Rating 
             select(type="dropdown") 
@@ -26,6 +26,7 @@ block content
         input(type='hidden' name='_csrf' value=csrfToken)
         input(type='hidden' name='movieId' value=movieId)
         input(type='hidden' name='userId' value=userId)
+        button(type='submit') Submit
 
 
 

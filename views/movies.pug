@@ -21,4 +21,4 @@ block content
         label Description: 
         span=movie.description
     div
-        input(type='button' onclick=`window.location='/movies/${movie.id}/reviews'` value='Write a Review')
+        input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')

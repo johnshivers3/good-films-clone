@@ -11,7 +11,7 @@ const reviewsRouter = require('./reviews')
 
 const router = express.Router();
 
-router.use('/:id/reviews', reviewsRouter);
+router.use(reviewsRouter);
 
 
 router.get('/:id', asyncHandler( async (req, res) => {
@@ -20,8 +20,6 @@ router.get('/:id', asyncHandler( async (req, res) => {
     const movie = await db.Movie.findOne({
         where: {id: movieId }
     });
-
-    console.log(movie)
 
     res.render('movies', {
         movie
