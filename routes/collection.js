@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/collection', csrfProtection, (req, res) => {
     const collection = db.Collection.build();
     const userId = parseInt(res.locals.user.id, 10);
-    const movieTitle = req.params.title;
     res.render('create-collection', {
         title: 'Create Collection',
         collection,
@@ -21,9 +20,9 @@ router.get('/collection', csrfProtection, (req, res) => {
 const reviewValidators = [
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a name for your collection.'),
-        // .isLength({ min: 50 })
-        // .withMessage('First Name must not be more than 50 characters long'),
+        .withMessage('Please provide a name for your collection.')
+        .isLength({ min: 255 })
+        .withMessage('Name of collection must not be more than 255 characters long'),
 ];
 
 router.post('/collection', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {

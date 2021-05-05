@@ -1,17 +1,17 @@
 extends layout.pug
 
 append head
-    link(rel="stylesheet" href="/stylesheets/user-register.css")
+    link(rel="stylesheet" href="/stylesheets/basic-form.css")
     include utils.pug
 
 block content
     +validationErrorSummary(errors)
-    .collectionForm
-    form(action=`/collection/` method='post')
-        h1= `Make a Collection`
-        div
-        input(type="text" name='name' value='name' placeholder='name')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        input(type='hidden' name='movieId' value=movieId)
-        input(type='hidden' name='userId' value=userId)
-        button(type='submit') Submit
+    .body-form-container
+        form(action=`/collection/` method='post' class='body-form')
+            h4= `Make a Collection`
+            div
+            label(for='name') Name
+            input(type="text" name='name' value='name')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            input(type='hidden' name='userId' value=userId)
+            button(type='submit') Submit
