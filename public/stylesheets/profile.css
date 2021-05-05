@@ -1,0 +1,102 @@
+h1{
+    color: black
+}
+
+h3 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.collection_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.review{
+    background-color:rgb(245, 232, 215);
+    padding: 2% 5%;
+
+}
+
+.docu{
+    height: 200px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 35px;
+    border: 1px solid black ;
+    overflow-x: scroll;
+
+}
+
+.freeSolo,
+.icarus,
+.lastDance,
+.myOT,
+.tSD,
+.alien,
+.a143,
+.it,
+.sinister,
+.conjur,
+.blade,
+.const,
+.hanibal,
+.seven,
+.MK,
+.homelone,
+.Bruce,
+.rh2,
+.ted,
+.spaceBalls{
+    padding: 5px;
+    width: 75px;
+    height: 125px;
+}
+
+.freeSolo:hover,
+.icarus:hover,
+.lastDance:hover,
+.myOT:hover,
+.tSD:hover,
+.alien:hover,
+.a143:hover,
+.it:hover,
+.sinister:hover,
+.conjur:hover,
+.blade:hover,
+.const:hover,
+.hanibal:hover,
+.seven:hover,
+.MK:hover,
+.homelone:hover,
+.Bruce:hover,
+.rh2:hover,
+.ted:hover,
+.spaceBalls:hover{
+    width:125px;
+    height:200px;
+    transition: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.asd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: small;
+}
+
+h2{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.collection_container > h2 {
+    text-align: center;
+    padding-bottom: 8px;
+    font-size: large;
+}

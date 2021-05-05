@@ -2,22 +2,52 @@ extends layout.pug
 
 append head
   //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/user-register.css")
+  link(rel="stylesheet" href="/stylesheets/profile.css")
 
 include utils.pug
 
 block content
-  h3 Welcome #{firstName}!
+  h2 Welcome #{firstName}!
   div
     h3 Your Collections
-    each collection in Collections
-      div
-        h2 #{collection.dataValues.content}
     div
-    h3 Recent Reviews
+      each collection in Collections
+        div(class='collection_container')
+          h2 #{collection.dataValues.name}
+          div(class="docu")
+            div(class='asd')
+              h2 Free Solo
+              a(href="movies/20")
+                img(src="/Images/freeSolo.jpg" alt="Free Solo" class="freeSolo")
+            div(class='asd')
+              h2 Icarus
+              a(href="movies/19")
+                img(src="/Images/icarus.jpg" alt="ICARUS" class="icarus")
+            div(class='asd')
+              h2 Last Dance
+              a(href="movies/17")
+                img(src="/Images/lastDance.jpg" alt="Last Dance" class="lastDance")
+            div(class='asd')
+              h2 My Octopus Teacher
+              a(href="movies/16")
+                img(src="/Images/myOctopusTeacher.jpg" alt="My Octopus Teacher" class="myOT")
+            div(class='asd')
+              h2 The Social Dilemma
+              a(href="movies/18")
+                img(src="/Images/theSocialDilemma.jpg" alt="The Social Dilemma" class="tSD")
+          //- each movie in collection.Movies
+          //-   div
+          //-     div
+          //-       h2 #{movie.title}
+          //-       a(href="movies/20")
+          //-         img(src="/Images/freeSolo.jpg" alt="Free Solo" class="freeSolo")
 
-    each review in Reviews
-      div
-        p  #{review.dataValues.content}
-        div
-        p  #{review.dataValues.rating}
+  div
+    h3 Recent Reviews
+    div
+      each review in Reviews
+        div(class='review')
+          h4 Title: #{review.dataValues.Movie.dataValues.title}
+          p  Review: #{review.dataValues.content}
+          div
+          p  Rating: #{review.dataValues.rating}
