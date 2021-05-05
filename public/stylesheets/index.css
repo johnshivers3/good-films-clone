@@ -74,3 +74,8 @@ h1{
     align-items: center;
     font-size: small;
 }
+
+h2{
+    font-weight: bold;
+    font-size: 14px;
+}
