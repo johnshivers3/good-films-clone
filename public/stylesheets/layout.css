@@ -1,7 +1,11 @@
 body { 
     background-color: rgb(192, 152, 103);
     font-family: monospace;
+    
+}
 
+*:not(.logoImg){
+    box-sizing: border-box;
 }
 
 .navbar {
