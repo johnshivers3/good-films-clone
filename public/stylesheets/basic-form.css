@@ -47,3 +47,41 @@ button {
 h3 {
   text-align: center;
 }
+
+label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (min-width: 900px) {
+  .movieInfo {
+    width: 585px;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .movieInfo {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movieInfo {
+    width: 390px;
+    flex-direction: column;
+  }
+  .image {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.info {
+  margin-left: 15px;
+}
+
