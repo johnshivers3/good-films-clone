@@ -1,6 +1,7 @@
 .body-form-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .body-form {
@@ -56,32 +57,47 @@ label {
 .movieInfo {
   display: flex;
   flex-direction: row;
+  margin: 10px;
 }
 
 @media screen and (min-width: 900px) {
-  .movieInfo {
+  .body-form {
     width: 585px;
   }
 }
 
 @media screen and (max-width: 900px) and (min-width: 600px) {
-  .movieInfo {
+  .body-form {
     width: 65%;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .movieInfo {
+  .body-form {
     width: 390px;
+  }
+  .movieInfo {
     flex-direction: column;
   }
   .image {
     display: flex;
     justify-content: center;
   }
+  .userAndDate, 
+  .reviewContent {
+    width: 100%;
+  }
 }
 
 .info {
   margin-left: 15px;
+}
+
+.userAndDate {
+  width: 30%;
+}
+
+.reviewContent {
+  width: 70%;
 }
 

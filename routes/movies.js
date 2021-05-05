@@ -21,8 +21,22 @@ router.get('/:id', asyncHandler( async (req, res) => {
         where: {id: movieId }
     });
 
+    const reviews = await db.Review.findAll({
+        where: { movieId }
+    })
+
+    // for (let i = 0; i < reviews.length; i++) {
+    //     reviews[i].createdAt = reviews[i].createdAt.splice(0, 14)
+        
+    // }
+
+    // reviews.foreach(review => {
+    //     review.createdAt = review.createdAt.slice(0, 14);
+    // });
+
     res.render('movies', {
-        movie
+        movie,
+        reviews
     })
 }))
 

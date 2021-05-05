@@ -30,3 +30,16 @@ block content
                     span=movie.description
                 div
                     input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
+        h1 Reviews
+        .body-form
+            each review in reviews 
+                .movieInfo
+                    .userAndDate 
+                        div
+                            label User: 
+                                span= review.userId
+                        div 
+                            label Date Created
+                                span= review.createdAt
+                    .reviewContent
+                        p= review.content
