@@ -1,27 +1,32 @@
-extends layout.pug 
+extends layout.pug
 
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/basic-form.css")
 block content
-    .movie-container
-    div
-        label Movie:
-        span=movie.title
-    div
-        label Genre: 
-        span=movie.genre
-    div
-        label Directors: 
-        span=movie.directors
-    div
-        label Actors:  
-        span=movie.actors
-    div
-        label Release Date:  
-        span=movie.releaseDate 
-    div
-        label Description: 
-        span=movie.description
-    div 
-        span
-            img(src=movie.image, alt=movie.title)
-    div
-        input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
+    .body-form-container
+        .body-form.movieInfo
+            div.image
+                span
+                    img(src=movie.image, alt=movie.title)
+            div.info        
+                div
+                    label Movie: 
+                    span=movie.title
+                div
+                    label Genre: 
+                    span=movie.genre
+                div
+                    label Directors: 
+                    span=movie.directors
+                div
+                    label Actors:  
+                    span=movie.actors
+                div
+                    label Release Date:  
+                    span=movie.releaseDate 
+                div
+                    label Description: 
+                    span=movie.description
+                div
+                    input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
