@@ -11,7 +11,7 @@ const reviewsRouter = require('./reviews')
 
 const router = express.Router();
 
-router.use(reviewsRouter);
+router.use('/', reviewsRouter);
 
 
 router.get('/:id', asyncHandler( async (req, res) => {
@@ -25,8 +25,6 @@ router.get('/:id', asyncHandler( async (req, res) => {
         movie
     })
 }))
-
-
 
 
 

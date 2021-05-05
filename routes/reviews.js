@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs')
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
-const { ContextHandlerImpl } = require('express-validator/src/chain');
 
 const router = express.Router();
 
@@ -33,22 +32,20 @@ const reviewValidators = [
         // .withMessage('First Name must not be more than 50 characters long'),
     check('rating')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for Last Name')
+        .withMessage('Please provide a value for rating')
         // .isLength({ min: 1 , max: 5})
         // .withMessage('Rating must be between 1 and 5')
 ];
 
-router.post('/:id/:title/reviews'), csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
+router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
 
-    const review = db.Review.build({
+    const review = await db.Review.build({
         content,
         rating,
         movieId,
         userId
     });
-
-    console.log('________________________________________________________aksdjfj fsd j;alskd fja;lsdk fjks;dlfjk______')
 
     const validatorErrors = validationResult(req);
 
@@ -64,7 +61,7 @@ router.post('/:id/:title/reviews'), csrfProtection, reviewValidators, asyncHandl
             csrfToken: req.csrfToken(),
         });
     }
-})
+}))
 
 
 
