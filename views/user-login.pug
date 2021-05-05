@@ -1,8 +1,6 @@
-extends layout.pug
+
 
 include utils.pug
-
-block content
   +validationErrorSummary(errors)
   form(action='/users/login' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
@@ -10,6 +8,7 @@ block content
     +field('Password', 'password', null, 'password')
     div
       button(type='submit' class='btn btn-primary') Login
-      a(href='/') Cancel
-  div
-    p: a(href='/users/register') Don't have an account?
+      block navbar 
+  //-     a(href='/') Cancel
+  //- div
+  //-   p: a(href='/users/register') Don't have an account?

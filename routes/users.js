@@ -97,12 +97,12 @@ router.post('/register', csrfProtection, userValidators,
     }
   }));
 
-router.get('/login', csrfProtection, (req, res) => {
-  res.render('user-login', {
-    title: 'Login',
-    csrfToken: req.csrfToken(),
-  });
-});
+// router.get('/login', csrfProtection, (req, res) => {
+//   res.render('index', {
+//     title: 'Login',
+//     csrfToken: req.csrfToken(),
+//   });
+// });
 
 const loginValidators = [
   check('emailAddress')
@@ -136,7 +136,7 @@ router.post('/login', csrfProtection, loginValidators,
           // If the password hashes match, then login the user
           // and redirect them to the default route.
           await loginUser(req, res, user);
-          return res.redirect('/');
+          return req.session.save(() => res.redirect("/"))
         }
       }
 
@@ -146,7 +146,7 @@ router.post('/login', csrfProtection, loginValidators,
       errors = validatorErrors.array().map((error) => error.msg);
     }
 
-    res.render('user-login', {
+    res.render('index', {
       title: 'Login',
       emailAddress,
       errors,
