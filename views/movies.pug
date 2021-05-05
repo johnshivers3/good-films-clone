@@ -20,5 +20,8 @@ block content
     div
         label Description: 
         span=movie.description
+    div 
+        span
+            img(src=movie.image, alt=movie.title)
     div
         input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
