@@ -1,0 +1,23 @@
+extends layout.pug
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/user-register.css")
+
+include utils.pug
+
+block content
+  h3 Welcome #{firstName}!
+  div
+    h3 Your Collections
+    each collection in Collections
+      div
+        h2 #{collection.dataValues.content}
+    div
+    h3 Recent Reviews
+
+    each review in Reviews
+      div
+        p  #{review.dataValues.content}
+        div
+        p  #{review.dataValues.rating}

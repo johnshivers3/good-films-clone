@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-form {
+form:not(.logoutForm) {
   border: 1px solid black;
   padding: 10px;
   padding-top: 15px;
