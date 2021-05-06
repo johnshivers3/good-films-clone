@@ -11,9 +11,40 @@ const reviewsRouter = require('./reviews')
 
 const router = express.Router();
 
-router.use('/', reviewsRouter);
+// router.use('/reviews', reviewsRouter);
 
 const { User } = db;
+
+router.post('/reviews', asyncHandler( async (req, res) => {
+    const { content, rating, movieId, userId} = req.body;
+
+    console.log("before creation")
+
+    const review = await db.Review.create({
+        content,
+        rating,
+        movieId,
+        userId
+    });
+
+    console.log("THIS IS THE REVIEW",review)
+
+    const validatorErrors = [];
+
+    if (validatorErrors.isEmpty()) {
+        console.log("about to save")
+        await review.save();
+        res.status(201).json(review);
+    } else {
+        const errors = validatorErrors.array().map((error) => error.msg);
+        res.render('create-review', {
+            title: 'Create Review',
+            review,
+            errors,
+            csrfToken: req.csrfToken(),
+        });
+    }
+}))
 
 
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
@@ -42,7 +73,6 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         reviewsFormatted.push(newReview);
     });
 
-    console.log(req.locals)
 
     const collections = await db.Collection.findAll({
         where: {

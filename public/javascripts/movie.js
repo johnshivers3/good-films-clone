@@ -23,25 +23,31 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('create-review').addEventListener('click', async (event) =>{
         event.preventDefault();
 
+        console.log('in event listener')
+
         const rating = document.getElementById('rating').value;
         const content = document.getElementById('content').value;
         const userId = document.getElementById('userId').value;
         const movieId = document.getElementById('movieId').value;
 
-        const hello = await fetch(`/movies`, {
+        const data = {
+            rating,
+            content,
+            userId,
+            movieId
+        }
+
+        const hello = await fetch(`/movies/reviews`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
-                rating,
-                content,
-                userId,
-                movieId
-            }
+            body: JSON.stringify(data)
+           
         })
+        // const anything = await hello.json()
 
-        console.log("hello")
+        // console.log(anything)
 
     });
 

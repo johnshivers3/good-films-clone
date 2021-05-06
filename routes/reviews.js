@@ -9,20 +9,20 @@ const { loginUser, logoutUser } = require('../auth');
 const router = express.Router();
 
 
-router.get('/:id/:title/reviews', csrfProtection, (req, res) => {
-    const review = db.Review.build();
-    const movieId = parseInt(req.params.id, 10);
-    const userId = parseInt(res.locals.user.id, 10);
-    const movieTitle = req.params.title;
-    res.render('create-review', {
-        title: 'Create Review',
-        review,
-        movieId,
-        movieTitle,
-        userId,
-        csrfToken: req.csrfToken(),
-    });
-});
+// router.get('/:id/:title/reviews', csrfProtection, (req, res) => {
+//     const review = db.Review.build();
+//     const movieId = parseInt(req.params.id, 10);
+//     const userId = parseInt(res.locals.user.id, 10);
+//     const movieTitle = req.params.title;
+//     res.render('create-review', {
+//         title: 'Create Review',
+//         review,
+//         movieId,
+//         movieTitle,
+//         userId,
+//         csrfToken: req.csrfToken(),
+//     });
+// });
 
 const reviewValidators = [
     check('content')
@@ -37,7 +37,7 @@ const reviewValidators = [
         // .withMessage('Rating must be between 1 and 5')
 ];
 
-router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
+router.post('/', csrfProtection, asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
 
     const review = await db.Review.create({
@@ -47,11 +47,14 @@ router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res
         userId
     });
 
-    const validatorErrors = validationResult(req);
+    console.log("THIS IS THE REVIEW",review)
+
+    const validatorErrors = [];
 
     if (validatorErrors.isEmpty()) {
+        console.log("about to save")
         await review.save();
-        res.redirect('/');
+        res.status(201).json(review);
     } else {
         const errors = validatorErrors.array().map((error) => error.msg);
         res.render('create-review', {
