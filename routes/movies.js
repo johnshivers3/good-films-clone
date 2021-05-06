@@ -28,27 +28,23 @@ router.get('/:id', asyncHandler( async (req, res) => {
         include: User
     })
 
-    console.log(reviews)
+    let reviewsFormatted = []
 
-    reviews.array().map(review => review.createdAt = review.createdAt.slice(0, 14))
+    reviews.forEach((review, i) => {
+        const split = review.createdAt.toString().split(' ');
+        const dateFormatted = `${split[0]} ${split[1]} ${split[2]}`
 
-    // for (review in reviews) {
-    //     console.log(review)
-    //     review.createdAt = review.createdAt.slice(0, 14);
-    // }
-
-    // for (let i = 0; i < reviews.length; i++) {
-    //     reviews[i].createdAt = reviews[i].createdAt.splice(0, 14)
-        
-    // }
-
-    // reviews.foreach(review => {
-    //     review.createdAt = review.createdAt.slice(0, 14);
-    // });
+        const newReview = {
+            user: `${review.User.firstName} ${review.User.lastName}`,
+            date: dateFormatted,
+            content: review.content
+        }
+        reviewsFormatted.push(newReview);
+    });
 
     res.render('movies', {
         movie,
-        reviews
+        reviewsFormatted
     })
 }))
 

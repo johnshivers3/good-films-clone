@@ -32,14 +32,17 @@ block content
                     input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
         h1 Reviews
         .body-form
-            each review in reviews 
+            if locals.authenticated     
+                include create-review.pug
+
+            each review in reviewsFormatted
                 .movieInfo
                     .userAndDate 
                         div
                             label User: 
-                            span= `${review.User.firstName} ${review.User.lastName}`
+                            span= review.user
                         div 
                             label Date: 
-                            span= review.createdAt
+                            span= review.date
                     .reviewContent
                         p= review.content
