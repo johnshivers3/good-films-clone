@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     releaseDate: {
       type:DataTypes.DATE,
       allowNull:false
+    },
+    image: {
+      type:DataTypes.STRING,
+      allowNull: false,
     }
   }, {});
   Movie.associate = function(models) {

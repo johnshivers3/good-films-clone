@@ -23,6 +23,7 @@ module.exports = {
           genre: "Action",
           actors: "Keanu Reeves,Rachel Weisz,Djimon Hounsou,Shia LaBeouf",
           directors: "Francis Lawrence",
+          image: "/Images/Constantine.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -35,6 +36,7 @@ module.exports = {
           actors:
             "Wesley Snipes,Stephen Dorff,Kris Kristofferson,N'Bushe Wright",
           directors: "Stephen Norrington",
+          image: "/Images/Blade.jpg", 
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -46,6 +48,7 @@ module.exports = {
           genre: "Action",
           actors: "Gaspard Ulliel,Rhys Ifans,Gong Li,Aaron Thomas",
           directors: "Peter Webber",
+          image: "/Images/HannibalRising.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -57,6 +60,7 @@ module.exports = {
           genre: "Action",
           actors: "Morgan Freeman,Brad Pitt,Kevin Spacey",
           directors: "David Fincher",
+          image: "/Images/Se7en.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -68,6 +72,7 @@ module.exports = {
           genre: "Action",
           actors: "Lewis Tan,Jessica McNamee,Josh Lawson",
           directors: "Simon McQuoid",
+          image: "/Images/MortalKombat.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -79,6 +84,7 @@ module.exports = {
           genre: "Comedy",
           actors: "Macaulay Culkin,Joe Pesci,Daniel Stern",
           directors: "Chris Columbus",
+          image: "/Images/HomeAlone.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -90,6 +96,7 @@ module.exports = {
           genre: "Comedy",
           actors: "Jim Carrey,Jennifer Aniston,Morgan Freeman",
           directors: "Tom Shadyac",
+          image: "/Images/BruceAlmighty.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -101,6 +108,7 @@ module.exports = {
           genre: "Comedy",
           actors: "Jackie Chan,Chris Tucker,John Lone",
           directors: "Brett Ratner",
+          image: "/Images/RushHour2.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -112,6 +120,7 @@ module.exports = {
           genre: "Comedy",
           actors: "Mark Wahlberg,Mila Kunis,Seth MacFarlane",
           directors: "Seth MacFarlane",
+          image: "/Images/Ted.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -123,6 +132,7 @@ module.exports = {
           genre: "Comedy",
           actors: "Mel Brooks,John Candy,Rick Moranis",
           directors: "Mel Brooks",
+          image: "/Images/SpaceBalls.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -135,6 +145,7 @@ module.exports = {
           description:
             "After a space merchant vessel receives an unknown transmission as a distress call, one of the crew is attacked by a mysterious life form and they soon realize that its life cycle has merely begun.",
           releaseDate: "25 May 1979",
+          image: "/Images/alien_.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -146,6 +157,7 @@ module.exports = {
           description:
             "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.",
           releaseDate: "19 July 2013",
+          image: "/Images/conjuring.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -158,6 +170,7 @@ module.exports = {
           description:
             "In the summer of 1989, a group of bullied kids band together to destroy a shape-shifting monster, which disguises itself as a clown and preys on the children of Derry, their small Maine town.",
           releaseDate: " 8 September 2017",
+          image: "/Images/it.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -169,6 +182,7 @@ module.exports = {
           description:
             "A team of parapsychologists try to figure out a strange phenomenon occurring in an apartment building.",
           releaseDate: "4 May 2012",
+          image: "/Images/apartment143.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -180,6 +194,7 @@ module.exports = {
           description:
             "Washed-up true crime writer Ellison Oswalt finds a box of super 8 home movies in his new home that suggest the murder that he is currently researching is the work of a serial killer whose work dates back to the 1960s.",
           releaseDate: "12 October 2012",
+          image: "/Images/sinister.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -191,6 +206,7 @@ module.exports = {
           description:
             "A filmmaker forges an unusual friendship with an octopus living in a South African kelp forest, learning as the animal shares the mysteries of her world.",
           releaseDate: "7 September 2020",
+          image: "/Images/myOctopusTeacher.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -202,6 +218,7 @@ module.exports = {
           description:
             "Charting the rise of the 1990's Chicago Bulls, led by Michael Jordan, one of the most notable dynasties in sports history.",
           releaseDate: "19 April 2020",
+          image: "/Images/lastDance.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -213,6 +230,7 @@ module.exports = {
           description:
             "Explores the dangerous human impact of social networking, with tech experts sounding the alarm on their own creations.",
           releaseDate: "9 September 2020",
+          image: "/Images/theSocialDilemma.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -224,6 +242,7 @@ module.exports = {
           description:
             "When Bryan sets out to uncover the truth about doping in sports, a chance meeting with a Russian scientist transforms his story from a personal experiment into a geopolitical thriller.",
           releaseDate: "4 August 2017",
+          image: "/Images/icarus.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -235,6 +254,7 @@ module.exports = {
           description:
             "Alex Honnold attempts to become the first person to ever free solo climb El Capitan.",
           releaseDate: "13 December 2018",
+          image: "/Images/freeSolo.jpg",
           createdAt: new Date(),
           updatedAt: new Date()
         },

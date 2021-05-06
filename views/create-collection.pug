@@ -1,0 +1,17 @@
+extends layout.pug
+
+append head
+    link(rel="stylesheet" href="/stylesheets/basic-form.css")
+    include utils.pug
+
+block content
+    +validationErrorSummary(errors)
+    .body-form-container
+        form(action=`/collection/` method='post' class='body-form')
+            h4= `Make a Collection`
+            div
+            label(for='name') Name
+            input(type="text" name='name' value='name')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            input(type='hidden' name='userId' value=userId)
+            button(type='submit') Submit
