@@ -29,21 +29,24 @@ router.post('/reviews', asyncHandler( async (req, res) => {
 
     console.log("THIS IS THE REVIEW",review)
 
-    const validatorErrors = [];
+    res.status(201).json(review);
 
-    if (validatorErrors.isEmpty()) {
-        console.log("about to save")
-        await review.save();
-        res.status(201).json(review);
-    } else {
-        const errors = validatorErrors.array().map((error) => error.msg);
-        res.render('create-review', {
-            title: 'Create Review',
-            review,
-            errors,
-            csrfToken: req.csrfToken(),
-        });
-    }
+
+    // const validatorErrors = [];
+
+    // if (validatorErrors.isEmpty()) {
+    //     console.log("about to save!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //     await review.save();
+    //     res.status(201).json(review);
+    // } else {
+    //     const errors = validatorErrors.array().map((error) => error.msg);
+    //     res.render('create-review', {
+    //         title: 'Create Review',
+    //         review,
+    //         errors,
+    //         csrfToken: req.csrfToken(),
+    //     });
+    // }
 }))
 
 

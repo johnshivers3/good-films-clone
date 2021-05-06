@@ -45,9 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(data)
            
         })
-        // const anything = await hello.json()
 
-        // console.log(anything)
+        
+        const anything = await hello.json()
+        const divToPrepend = document.getElementsById("reviewBox");
+        const newReview = document.createElement(div)
+
+        newReview.classList.add()
 
     });
 

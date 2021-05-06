@@ -42,7 +42,7 @@ block content
                                 a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection! 
 
         h1 Reviews
-        .body-form
+        .body-form#reviewBox
             if locals.authenticated     
                 include create-review.pug
 
