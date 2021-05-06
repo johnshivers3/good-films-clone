@@ -23,6 +23,9 @@ html
             form(action='/users/logout' method='post' class='logoutForm')
               input(type='hidden' name='_csrf' value=csrfToken)
               button(type='submit' class='logoutBtn') Logout
+            form(action=`/users/delete/${user.id}` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              button(type='submit' class='logoutBtn') delete
         else
           span
             +validationErrorSummary(errors)
