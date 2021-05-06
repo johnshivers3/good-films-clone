@@ -16,7 +16,7 @@ router.use('/', reviewsRouter);
 const { User } = db;
 
 
-router.get('/:id', asyncHandler( async (req, res) => {
+router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
     const movie = await db.Movie.findOne({
@@ -44,7 +44,8 @@ router.get('/:id', asyncHandler( async (req, res) => {
 
     res.render('movies', {
         movie,
-        reviewsFormatted
+        reviewsFormatted,
+        csrfToken: req.csrfToken()
     })
 }))
 

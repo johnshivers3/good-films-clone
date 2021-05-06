@@ -40,7 +40,7 @@ const reviewValidators = [
 router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
 
-    const review = await db.Review.build({
+    const review = await db.Review.create({
         content,
         rating,
         movieId,
