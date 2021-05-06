@@ -3,6 +3,7 @@ extends layout.pug
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/basic-form.css")
+  script(src='/javascripts/movie.js' type="module")
 block content
     .body-form-container
         .body-form.movieInfo
@@ -28,6 +29,18 @@ block content
                 div
                     label Description: 
                     span=movie.description
+                if locals.authenticated
+                    div#addToCollectionsDiv
+                        form
+                            if collections
+                                select#collectionSelect
+                                    each collection in collections 
+                                        option(value=collection.id)= collection.name
+                                input(type='hidden' id='movieId' value=movie.id)
+                                button#addToCollection Add to Collection
+                            if !collections
+                                a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection! 
+
         h1 Reviews
         .body-form
             if locals.authenticated     

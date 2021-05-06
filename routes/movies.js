@@ -42,9 +42,18 @@ router.get('/:id', asyncHandler( async (req, res) => {
         reviewsFormatted.push(newReview);
     });
 
+    console.log(req.locals)
+
+    const collections = await db.Collection.findAll({
+        where: {
+            userId: req.session.auth.userId
+        }
+    })
+
     res.render('movies', {
         movie,
-        reviewsFormatted
+        reviewsFormatted,
+        collections
     })
 }))
 
