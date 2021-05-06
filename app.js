@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 // const reviewsRouter = require('./routes/reviews')
 const moviesRouter = require('./routes/movies')
+const profileRouter = require('./routes/profile')
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 const collectionRouter = require('./routes/collection')
@@ -45,6 +46,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // app.use('/reviews', reviewsRouter);
 app.use('/movies', moviesRouter);
+app.use('/profile', profileRouter);
 app.use('/', collectionRouter);
 
 // catch 404 and forward to error handler

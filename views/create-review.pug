@@ -15,8 +15,8 @@ block content
           h4= `Movie: ${movieTitle}`
           textarea(name="content", cols="50", rows="10" placeholder='Write your review here!')
           div
-              label(for="rating") Rating 
-              select(type="dropdown" name='rating') 
+              label(for="rating") Rating
+              select(type="dropdown" name='rating')
                   option(value=1) 1
                   option(value=2) 2
                   option(value=3) 3
@@ -26,6 +26,3 @@ block content
           input(type='hidden' name='movieId' value=movieId)
           input(type='hidden' name='userId' value=userId)
           button(type='submit') Submit
-
-
-
