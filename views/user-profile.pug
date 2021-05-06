@@ -1,0 +1,57 @@
+extends layout.pug
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/profile.css")
+
+include utils.pug
+
+block content
+  h2 Welcome #{firstName}!
+  div
+    h3 Your Collections
+    div
+      +validationErrorSummary(errors)
+      .body-form-container
+        form(action=`/profile/${id}` method='post' class='body-form')
+          h4= `Make a Collection`
+          div
+          label(for='name') Name:
+          input(type="text" name='name' value="")
+          input(type='hidden' name='_csrf' value=csrfToken)
+          input(type='hidden' name='userId' value=userId)
+          button(type='submit') Submit
+    div
+      each collection in Collections
+        div(class='collection_container')
+          h2 #{collection.dataValues.name}
+          div(class="docu")
+            div(class='asd')
+              h2 Free Solo
+              a(href="../movies/20")
+                img(src="/Images/freeSolo.jpg" alt="Free Solo" class="freeSolo")
+            div(class='asd')
+              h2 Icarus
+              a(href="../movies/19")
+                img(src="/Images/icarus.jpg" alt="ICARUS" class="icarus")
+            div(class='asd')
+              h2 Last Dance
+              a(href="../movies/17")
+                img(src="/Images/lastDance.jpg" alt="Last Dance" class="lastDance")
+            div(class='asd')
+              h2 My Octopus Teacher
+              a(href="../movies/16")
+                img(src="/Images/myOctopusTeacher.jpg" alt="My Octopus Teacher" class="myOT")
+            div(class='asd')
+              h2 The Social Dilemma
+              a(href="../movies/18")
+                img(src="/Images/theSocialDilemma.jpg" alt="The Social Dilemma" class="tSD")
+  div
+    h3 Recent Reviews
+    div
+      each review in Reviews
+        div(class='review')
+          h4 Title: #{review.dataValues.Movie.dataValues.title}
+          p  Review: #{review.dataValues.content}
+          div
+          p  Rating: #{review.dataValues.rating}
