@@ -13,6 +13,8 @@ const router = express.Router();
 
 router.use('/', reviewsRouter);
 
+const { User } = db;
+
 
 router.get('/:id', asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
@@ -21,8 +23,28 @@ router.get('/:id', asyncHandler( async (req, res) => {
         where: {id: movieId }
     });
 
+    const reviews = await db.Review.findAll({
+        where: { movieId },
+        include: User
+    })
+
+    let reviewsFormatted = []
+
+    reviews.forEach((review, i) => {
+        const split = review.createdAt.toString().split(' ');
+        const dateFormatted = `${split[0]} ${split[1]} ${split[2]}`
+
+        const newReview = {
+            user: `${review.User.firstName} ${review.User.lastName}`,
+            date: dateFormatted,
+            content: review.content
+        }
+        reviewsFormatted.push(newReview);
+    });
+
     res.render('movies', {
-        movie
+        movie,
+        reviewsFormatted
     })
 }))
 

@@ -1,6 +1,7 @@
 .body-form-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .body-form {
@@ -9,6 +10,7 @@
   padding-top: 15px;
   box-shadow: 4px 4px 3px 2px rgba(199, 109, 199, 0.575);
   border-radius: 10px;
+  background-color:rgb(245, 232, 215);
 }
 
 h2 {
@@ -46,4 +48,86 @@ button {
 
 h3 {
   text-align: center;
+}
+
+label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+@media screen and (min-width: 900px) {
+  .body-form {
+    width: 585px;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .body-form {
+    width: 65%;
+  }
+}
+.userAndDate {
+  width: 30%;
+  border-right: 1px solid black;
+  padding-right: 10px ;
+}
+
+.reviewContent {
+  width: 70%;
+  padding-left: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .body-form {
+    width: 390px;
+  }
+  .movieInfo {
+    flex-direction: column;
+  }
+  .image {
+    display: flex;
+    justify-content: center;
+  }
+  .userAndDate, 
+  .reviewContent {
+    width: 100%;
+  }
+  .userAndDate {
+      border-bottom: 1px solid black;
+      border-right: none;
+    padding-bottom: 10px ;
+
+  }
+}
+
+.info {
+  margin-left: 15px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.create-review-box {
+  width: 70%;
+  margin-bottom: 20px;
+  background-color: rgb(192, 152, 103);
+  display: flex;
+  flex-direction: column;
+}
+
+.review-area {
+  background-color: rgb(192, 152, 103);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.center {
+  align-self: center;
 }
