@@ -10,6 +10,7 @@
   padding-top: 15px;
   box-shadow: 4px 4px 3px 2px rgba(199, 109, 199, 0.575);
   border-radius: 10px;
+  background-color:rgb(245, 232, 215);
 }
 
 h2 {
@@ -109,4 +110,24 @@ label {
   margin-left: 15px;
 }
 
+textarea {
+  width: 100%;
+}
 
+.create-review-box {
+  width: 70%;
+  margin-bottom: 20px;
+  background-color: rgb(192, 152, 103);
+  display: flex;
+  flex-direction: column;
+}
+
+.review-area {
+  background-color: rgb(192, 152, 103);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.center {
+  align-self: center;
+}

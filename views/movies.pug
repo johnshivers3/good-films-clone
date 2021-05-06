@@ -28,15 +28,13 @@ block content
                 div
                     label Description: 
                     span=movie.description
-                div
-                    input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')
         h1 Reviews
         .body-form
             if locals.authenticated     
                 include create-review.pug
 
             each review in reviewsFormatted
-                .movieInfo
+                .movieInfo.review-area
                     .userAndDate 
                         div
                             label User: 
@@ -46,3 +44,8 @@ block content
                             span= review.date
                     .reviewContent
                         p= review.content
+
+
+                        
+                //- div
+                //-     input(type='button' onclick=`window.location='/movies/${movie.id}/${movie.title}/reviews'` value='Write a Review')

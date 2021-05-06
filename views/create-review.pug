@@ -1,9 +1,8 @@
 +validationErrorSummary(errors)
 .body-form-container
-  form(action=`/movies/` method='post' class='body-form')
-      h4= `Movie: ${movieTitle}`
-      textarea(name="content", cols="50", rows="10" placeholder='Write your review here!')
-      div
+  form(action=`/movies/` method='post' class='body-form create-review-box')
+      textarea(name="content" rows='4' placeholder='Write your review here!')
+      .center
           label(for="rating") Rating 
           select(type="dropdown" name='rating') 
               option(value=1) 1
@@ -14,8 +13,8 @@
       input(type='hidden' name='_csrf' value=csrfToken)
       input(type='hidden' name='movieId' value=movieId)
       input(type='hidden' name='userId' value=userId)
-      button(type='submit') Submit
-      
+      button(type='submit' class='center') Submit
+
 //- extends layout.pug
 
 //- append head
