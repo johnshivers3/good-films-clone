@@ -37,9 +37,9 @@ block content
                     .userAndDate 
                         div
                             label User: 
-                                span= review.userId
+                            span= `${review.User.firstName} ${review.User.lastName}`
                         div 
-                            label Date Created
-                                span= review.createdAt
+                            label Date: 
+                            span= review.createdAt
                     .reviewContent
                         p= review.content

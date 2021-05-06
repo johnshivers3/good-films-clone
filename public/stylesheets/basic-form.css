@@ -71,6 +71,13 @@ label {
     width: 65%;
   }
 }
+.userAndDate {
+  width: 50%;
+}
+
+.reviewContent {
+  width: 50%;
+}
 
 @media screen and (max-width: 600px) {
   .body-form {
@@ -93,11 +100,4 @@ label {
   margin-left: 15px;
 }
 
-.userAndDate {
-  width: 30%;
-}
-
-.reviewContent {
-  width: 70%;
-}
 
