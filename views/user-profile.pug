@@ -7,14 +7,14 @@ append head
 include utils.pug
 
 block content
-  h2 Welcome #{firstName}!
+
   div
     h3 Your Collections
     div
       +validationErrorSummary(errors)
       .body-form-container
         form(action=`/profile/${id}` method='post' class='body-form')
-          h4= `Make a Collection`
+          h4.create-collection-label= `Make a new Collection`
           div
           label(for='name') Name:
           input(type="text" name='name' value="")
@@ -51,7 +51,10 @@ block content
     div
       each review in Reviews
         div(class='review')
-          h4 Title: #{review.dataValues.Movie.dataValues.title}
-          p  Review: #{review.dataValues.content}
           div
-          p  Rating: #{review.dataValues.rating}
+            img( class='review_image' src=review.dataValues.Movie.dataValues.image alt=review.dataValues.Movie.dataValues.title)
+          div.review_content
+            h4 Title: #{review.dataValues.Movie.dataValues.title}
+            p  Review: #{review.dataValues.content}
+            div
+            p  Rating: #{review.dataValues.rating}
