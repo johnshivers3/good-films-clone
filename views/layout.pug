@@ -17,7 +17,9 @@ html
           //- unordered list correctly positioned on the
           //- right side of the navbar.
         if locals.authenticated
-          span(class='welcome') Welcome #{user.firstName}!
+          span(class='welcome') Welcome #{user.firstName}
+            form(action=`/profile/${user.id}` method='get' class='profileBtn')
+              button(type="submit") Profile
             form(action='/users/logout' method='post' class='logoutForm')
               input(type='hidden' name='_csrf' value=csrfToken)
               button(type='submit' class='logoutBtn') Logout

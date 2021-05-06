@@ -6,7 +6,7 @@ const { csrfProtection, asyncHandler } = require('./utils');
 
 const router = express.Router();
 
-router.get('/collection', csrfProtection, (req, res) => {
+router.get('/profile', csrfProtection, (req, res) => {
     const collection = db.Collection.build();
     const userId = parseInt(res.locals.user.id, 10);
     res.render('create-collection', {
@@ -25,7 +25,7 @@ const reviewValidators = [
         .withMessage('Name of collection must not be more than 255 characters long'),
 ];
 
-router.post('/collection', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
+router.post('/profile/:id', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
     const { name, userId} = req.body;
 
     const collection = await db.Collection.build({
