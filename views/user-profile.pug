@@ -61,16 +61,16 @@ block content
         div(id=`review-${review.id}` class='review')
           input(type="hidden" value=review.id class="reviewIddd")
           div
-            img( class='review_image' src=review.dataValues.Movie.dataValues.image alt=review.dataValues.Movie.dataValues.title)
+            img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content
-            h4 Title: #{review.dataValues.Movie.dataValues.title}
-            p  Review: #{review.dataValues.content}
+            h4 Title: #{review.Movie.title}
+            p(id=`edits-${review.id}`)  Review: #{review.content}
             div
-            p  Rating: #{review.dataValues.rating}
+            p  Rating: #{review.rating}
             div 
             button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
             div 
-            button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}`) Edit Review
+            button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
             div 
             button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
   div.delete-profile-div

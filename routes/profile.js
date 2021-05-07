@@ -198,5 +198,24 @@ router.post(
   })
 );
 
+router.post(
+  '/review/edit/:id',
+  asyncHandler(async (req, res) => {
+    const newContent = req.query.content
+
+    console.log("THISSSSSSS", req)
+
+    const reviewId = parseInt(req.params.id, 10);
+    const review = await db.Review.findByPk( reviewId );
+    if(review){
+      await review.update({
+        content: newContent
+      }
+      );
+      res.status(201).json({ comment: "hello" })
+    }
+  })
+);
+
 
 module.exports = router;
