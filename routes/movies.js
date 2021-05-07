@@ -110,6 +110,7 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         const newReview = {
             user: `${review.User.firstName} ${review.User.lastName}`,
             date: dateFormatted,
+            rating: review.rating,
             content: review.content
         }
         reviewsFormatted.push(newReview);

@@ -67,10 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label>Date: </label>
                     <span>${datePlus}</span>
                 </div>
+                <div> 
+                    <label>Rating: </label>
+                    <span>${rating.value}</span>
+                </div>
             </div>
             <div class="reviewContent"> 
                 <p>${content.value}</p>
             </div>
+            
         </div> 
         `
 

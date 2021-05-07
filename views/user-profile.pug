@@ -65,6 +65,8 @@ block content
             p  Review: #{review.dataValues.content}
             div
             p  Rating: #{review.dataValues.rating}
+            div 
+            button(name="deleteReviewBtn")
   div.delete-profile-div
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
     form(action=`/profile/delete/${id}` method='post')
