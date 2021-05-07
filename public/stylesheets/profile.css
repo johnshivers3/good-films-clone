@@ -112,10 +112,10 @@ h2{
 }
 .delete-profile-div{
     display: flex;
-    /* flex-direction: row; */
     justify-content: space-around;
     align-items: center;
-    margin: 15vh auto;
+    margin: 15px;
+    margin-top: 75px;
     height: fit-content;
     padding: 10px;
     padding-top: 15px;
