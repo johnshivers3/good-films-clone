@@ -42,21 +42,25 @@ block content
                                 a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection! 
 
         h1 Reviews
-        .body-form
+            input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
+        .body-form#reviewBox
             if locals.authenticated     
                 include create-review.pug
 
-            each review in reviewsFormatted
-                .movieInfo.review-area
-                    .userAndDate 
-                        div
-                            label User: 
-                            span= review.user
-                        div 
-                            label Date: 
-                            span= review.date
-                    .reviewContent
-                        p= review.content
+            #reviewsList
+                each review in reviewsFormatted
+                    .movieInfo.review-area
+                        .userAndDate 
+                            div
+                                label User: 
+                                span= review.user
+                            div 
+                                label Date: 
+                                span= review.date
+                        .reviewContent
+                            p= review.content
+          
+
 
 
                         
