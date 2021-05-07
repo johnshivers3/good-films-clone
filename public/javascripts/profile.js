@@ -1,29 +1,39 @@
-const { RequestHeaderFieldsTooLarge } = require("http-errors");
+// const { RequestHeaderFieldsTooLarge } = require("http-errors");
 
 window.addEventListener("DOMContentLoaded", () => {
 
-const deleteBtn = document.querySelector(".delete-review-btn");
+const deleteBtns = document.querySelectorAll(".delete-review-btn");
 const editBtn = document.querySelector(".edit-review-btn");
 const saveBtn = document.querySelector(".save-review-btn");
 
-
-deleteBtn.addEventListener('click', (event) => {
-
-    const review = document.querySelector(".review")
-
-    const hello = await fetch(`/profile/reviews/${locals.user.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+deleteBtns.forEach(button => {
+    button.addEventListener('click', async (event) => {
+    
+        // const deleteBtn = document.getElementsByClassName("delete-review-btn")[0]
         
-    })
-
-    review.innerHTML = ''
-
-
-
+        let idNumber = event.target.id.split("-")[1]
+        
+        console.log(event.target.id)
+        
+        
+        
+        await fetch(`/profile/review/delete/${idNumber}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }  
+        })
+        
+        location.reload()
+    
+        // const review = document.getElementById(`review-${idNumber}`)
+        // review.innerHTML = ''
+    
+    
+    
+    });
 });
+
 
 
 

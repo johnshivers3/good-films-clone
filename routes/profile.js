@@ -188,15 +188,12 @@ router.get(
 
 router.post(
   '/review/delete/:id',
-  csrfProtection,
   asyncHandler(async (req, res) => {
-    const userId = parseInt(req.params.id, 10);
-    const review = await db.User.findOne({
-      where: 
-    });
-    if(userId){
+    const reviewId = parseInt(req.params.id, 10);
+    const review = await db.Review.findByPk( reviewId );
+    if(review){
       await review.destroy();
-      req.session.save(() => res.redirect("/review"))
+      res.end()
     }
   })
 );

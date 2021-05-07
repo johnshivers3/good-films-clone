@@ -58,7 +58,8 @@ block content
     h3 Recent Reviews
     div
       each review in Reviews
-        div(class='review')
+        div(id=`review-${review.id}` class='review')
+          input(type="hidden" value=review.id class="reviewIddd")
           div
             img( class='review_image' src=review.dataValues.Movie.dataValues.image alt=review.dataValues.Movie.dataValues.title)
           div.review_content
@@ -67,11 +68,11 @@ block content
             div
             p  Rating: #{review.dataValues.rating}
             div 
-            button(name="deleteReviewBtn" class="delete-review-btn") Delete Review
+            button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
             div 
-            button(name="editReviewBtn" class="edit-review-btn") Edit Review
+            button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}`) Edit Review
             div 
-            button(name="saveReviewBtn" class="save-review-btn") Save Review
+            button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
   div.delete-profile-div
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
     form(action=`/profile/delete/${id}` method='post')
