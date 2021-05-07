@@ -6,7 +6,6 @@ const Op = Sequelize.Op
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
-const { ContextHandlerImpl } = require('express-validator/src/chain');
 
 const reviewsRouter = require('./reviews');
 
@@ -55,40 +54,6 @@ router.post('/reviews', asyncHandler( async (req, res) => {
     // }
 }))
 
-// router.post('/reviews', asyncHandler( async (req, res) => {
-//     const { content, rating, movieId, userId} = req.body;
-
-//     console.log("before creation")
-
-//     const review = await db.Review.create({
-//         content,
-//         rating,
-//         movieId,
-//         userId
-//     });
-
-//     console.log("THIS IS THE REVIEW",review)
-
-//     res.status(201).json(review);
-
-
-//     // const validatorErrors = [];
-
-//     // if (validatorErrors.isEmpty()) {
-//     //     console.log("about to save!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-//     //     await review.save();
-//     //     res.status(201).json(review);
-//     // } else {
-//     //     const errors = validatorErrors.array().map((error) => error.msg);
-//     //     res.render('create-review', {
-//     //         title: 'Create Review',
-//     //         review,
-//     //         errors,
-//     //         csrfToken: req.csrfToken(),
-//     //     });
-//     // }
-// }))
-
 
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
@@ -119,18 +84,47 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     reviewsFormatted.reverse();
 
 
-    const collections = await db.Collection.findAll({
+    const bigCollections = await db.Collection.findAll({
         where: {
             userId: req.session.auth.userId,
-        },
-
+        }, 
+        include: db.Movie
     })
+
+    // console.log(collections[0].Movies)
+
+
+    let dropDownCollections = [];
+    let listCollections = [];
+
+    // for (let i = 0; i < bigCollections.length; i++) {
+        
+        
+    // }
+    for (collection of bigCollections) {
+        console.log('this is each collection..................', collection);
+        let bool = false
+        for (movieLoop of collection.Movies) {
+            if (movieLoop.id === movie.id) {
+                listCollections.push(collection);
+                bool = true;
+            } 
+        }
+        if (!bool) {
+            dropDownCollections.push(collection);
+        }
+    }
+    console.log('bigCollections', bigCollections)
+    console.log('dropDownCollections', dropDownCollections);
+    console.log('listCollections', listCollections);
 
     res.render('movies', {
         movie,
         reviewsFormatted,
         csrfToken: req.csrfToken(),
-        collections
+        bigCollections,
+        dropDownCollections,
+        listCollections
     })
 }))
 

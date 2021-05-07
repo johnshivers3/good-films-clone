@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-
-
     document.getElementById('create-review').addEventListener('click', async (event) => {
         event.preventDefault();
 
@@ -85,6 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    document.getElementById('collectionId').addEventListener('click', () => {
+        const collectionId = document.getelement
+    })
 
 
 });

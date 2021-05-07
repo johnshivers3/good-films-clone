@@ -23,6 +23,27 @@ router.post(
   })
 )
 
+// delete movies_Collection
+router.post(
+  "/:collectionId/:movieId", asyncHandler(async (req, res) => {
+
+    const movies_Collection = await db.movies_Collection.findAll({
+      where: {
+        collectionId: req.params.collectionId,
+        movieId: req.params.movieId
+      }
+    })
+
+    try {
+      await movies_Collection.destroy()
+      console.log('destroy')
+      res.redirect(201, 'back')
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+)
+
 router.get(
   "/:id",
   csrfProtection,

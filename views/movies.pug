@@ -33,14 +33,23 @@ block content
                 if locals.authenticated
                     div#addToCollectionsDiv
                         form
-                            if collections
+                            if bigCollections
                                 select#collectionSelect
-                                    each collection in collections
+                                    each collection in dropDownCollections
                                         option(name='current' value=collection.id)= collection.name
                                     form(action=`/${movieId}` _method='post')
                                         input(type='hidden' id='movieId' value=movie.id)
                                         button#addToCollection Add to Collection
-                            if !collections
+                                br
+                                br
+                                h4 In collections:
+                                    ul 
+                                        each collection in listCollections 
+                                            li= collection.name
+                                                form(action=`/${collection.id}/${movie.id}`)
+                                                    input(type='hidden' id='collectionId' value=collection.id)
+                                                    button(id='deleteCollection') Remove
+                            if !bigCollections
                                 a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection!
 
         h1 Reviews
