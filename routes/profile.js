@@ -19,10 +19,8 @@ router.get(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
     });
-
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     res.render("user-profile", {
       title: "My GoodFilms",
@@ -61,10 +59,9 @@ router.post(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const collection = await db.Collection.build({
       name,
@@ -157,7 +154,7 @@ router.get(
       ],
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const validatorErrors = validationResult(req);
 

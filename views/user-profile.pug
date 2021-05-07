@@ -1,7 +1,6 @@
 extends layout.pug
 
 append head
-  //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/profile.css")
 
 include utils.pug
@@ -22,26 +21,11 @@ block content
                 input(type='hidden' name='_csrf' value=csrfToken)
                 button(type='submit' class='deleteCol') Delete
           div(class="docu")
-            div(class='asd')
-              h2 Free Solo
-              a(href="../movies/20")
-                img(src="/Images/freeSolo.jpg" alt="Free Solo" class="freeSolo")
-            div(class='asd')
-              h2 Icarus
-              a(href="../movies/19")
-                img(src="/Images/icarus.jpg" alt="ICARUS" class="icarus")
-            div(class='asd')
-              h2 Last Dance
-              a(href="../movies/17")
-                img(src="/Images/lastDance.jpg" alt="Last Dance" class="lastDance")
-            div(class='asd')
-              h2 My Octopus Teacher
-              a(href="../movies/16")
-                img(src="/Images/myOctopusTeacher.jpg" alt="My Octopus Teacher" class="myOT")
-            div(class='asd')
-              h2 The Social Dilemma
-              a(href="../movies/18")
-                img(src="/Images/theSocialDilemma.jpg" alt="The Social Dilemma" class="tSD")
+            if collection.Movies
+              each movie in collection.Movies
+                div(class='asd')
+                  h2=movie.title
+                  img(src=movie.image alt=movie.title class="movies")
     div
       +validationErrorSummary(errors)
       .collection-form-container
@@ -59,12 +43,12 @@ block content
       each review in Reviews
         div(class='review')
           div
-            img( class='review_image' src=review.dataValues.Movie.dataValues.image alt=review.dataValues.Movie.dataValues.title)
+            img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content
-            h4 Title: #{review.dataValues.Movie.dataValues.title}
-            p  Review: #{review.dataValues.content}
+            h4 Title: #{review.Movie.title}
+            p  Review: #{review.content}
             div
-            p  Rating: #{review.dataValues.rating}
+            p  Rating: #{review.rating}
   div.delete-profile-div
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
     form(action=`/profile/delete/${id}` method='post')
