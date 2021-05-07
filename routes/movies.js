@@ -1,13 +1,14 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
-
+const { sequelize, Sequelize } = require('../db/models');
+const Op = Sequelize.Op
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser, logoutUser } = require('../auth');
 const { ContextHandlerImpl } = require('express-validator/src/chain');
 
-const reviewsRouter = require('./reviews')
+const reviewsRouter = require('./reviews');
 
 const router = express.Router();
 
@@ -42,12 +43,12 @@ router.get('/:id', asyncHandler( async (req, res) => {
         reviewsFormatted.push(newReview);
     });
 
-    console.log(req.locals)
-
-    const collections = await db.Collection.findAll({
+    const collections = await db.Collection
+    .findAll({
         where: {
-            userId: req.session.auth.userId
-        }
+            userId: req.session.auth.userId,
+        },
+
     })
 
     res.render('movies', {

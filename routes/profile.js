@@ -7,6 +7,23 @@ const { asyncHandler, csrfProtection } = require("./utils");
 
 const router = express.Router();
 
+
+router.post(
+  "/:collectionId/:movieId", asyncHandler(async(req, res) => {
+    const data = req.body
+    console.log(data);
+    try {
+      await db.Movies_Collection.create({
+        movieId: req.body.movieId,
+        collectionId: req.body.collectionId
+      })
+      res.redirect(201,'back')
+    } catch (error) {
+      console.error(error);
+    }
+  })
+)
+
 router.get(
   "/:id",
   csrfProtection,
@@ -19,7 +36,7 @@ router.get(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
+
     });
 
     const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
@@ -61,7 +78,6 @@ router.post(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
     });
 
     const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
@@ -93,6 +109,7 @@ router.post(
   })
   );
 
+
   router.post(
     '/delete/:id',
     csrfProtection,
@@ -119,7 +136,7 @@ router.post(
           collectionId,
           movieId,
         });
-        res.status(201).json({ comment: "hello" });
+
       } catch {
       throw new Error("Unable to create Movies_Collection connection!!! ");
     }
@@ -185,6 +202,5 @@ router.get(
     }
   })
 );
-
 
 module.exports = router;
