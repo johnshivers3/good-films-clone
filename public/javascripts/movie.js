@@ -26,46 +26,57 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('in event listener')
 
         const rating = document.getElementById('rating').value;
-        const content = document.getElementById('content').value;
+        const content = document.getElementById('content')
         const userId = document.getElementById('userId').value;
         const movieId = document.getElementById('movieId').value;
+        const userName = document.getElementById('userName').value;
 
+        
         const data = {
             rating,
-            content,
+            content: content.value,
             userId,
             movieId
         }
-
+        
         const hello = await fetch(`/movies/reviews`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-           
+            
         })
-
         
         const anything = await hello.json()
-        const divToPrepend = document.getElementsById("reviewBox");
-        const newReview = document.createElement(div)
-        const reviewList = document.getElementsByClassName(".reviewsList");
-
-        divToPrepend.innerHTML = `
-            <div class="movieInfo review-area">
-                <div class="userAndDate">
+        const divToPrepend = document.getElementById("reviewsList");
+        const newReview = document.createElement("div")
+        // const reviewList = document.getElementsByClassName(".reviewsList");
+        
+        const date = new Date();
+        const datePlus = `${date.toDateString()}`
+        
+        newReview.innerHTML = `
+        <div class="movieInfo review-area">
+            <div class="userAndDate">
+                <div>
                     <label>User: </label>
-                    <span>${locals.user.firstName} ${locals.user.lastName}</span>
-                    
-
+                    <span>${userName}</span>
                 </div>
-
-
-            </div> 
+                <div>
+                    <label>Date: </label>
+                    <span>${datePlus}</span>
+                </div>
+            </div>
+            <div class="reviewContent"> 
+                <p>${content.value}</p>
+            </div>
+        </div> 
         `
 
-        newReview.classList.add()
+        divToPrepend.prepend(newReview)
+
+        content.value = '';
 
     });
 

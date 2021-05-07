@@ -28,10 +28,8 @@ const reviewValidators = [
         // .withMessage('Rating must be between 1 and 5')
 ];
 
-router.post('/reviews', csrfProtection, asyncHandler( async (req, res) => {
+router.post('/reviews', asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
-
-    console.log("INSIDE THE POSTTTTTTTTTTTTTTTTTT")
 
     const review = await db.Review.create({
         content,
@@ -40,22 +38,20 @@ router.post('/reviews', csrfProtection, asyncHandler( async (req, res) => {
         userId
     });
 
-    console.log("THIS IS THE REVIEW",review)
-
     const validatorErrors = []
+    await review.save();
+    res.status(201).json(review);
     
-    if (validatorErrors.isEmpty()) {
-        await review.save();
-        res.status(201).json(review);
-    } else {
-        const errors = validatorErrors.array().map((error) => error.msg);
-        res.render('create-review', {
-            title: 'Create Review',
-            review,
-            errors,
-            csrfToken: req.csrfToken(),
-        });
-    }
+    // if (validatorErrors.isEmpty()) {
+    // } else {
+    //     const errors = validatorErrors.array().map((error) => error.msg);
+    //     res.render('create-review', {
+    //         title: 'Create Review',
+    //         review,
+    //         errors,
+    //         csrfToken: req.csrfToken(),
+    //     });
+    // }
 }))
 
 // router.post('/reviews', asyncHandler( async (req, res) => {
@@ -109,7 +105,7 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
 
     reviews.forEach((review, i) => {
         const split = review.createdAt.toString().split(' ');
-        const dateFormatted = `${split[0]} ${split[1]} ${split[2]}`
+        const dateFormatted = `${split[0]} ${split[1]} ${split[2]} ${split[3]}`
 
         const newReview = {
             user: `${review.User.firstName} ${review.User.lastName}`,
@@ -118,6 +114,8 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         }
         reviewsFormatted.push(newReview);
     });
+
+    reviewsFormatted.reverse();
 
 
     const collections = await db.Collection.findAll({
