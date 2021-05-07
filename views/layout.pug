@@ -25,13 +25,8 @@ html
             form(action='/users/logout' method='post' class='logoutForm')
               input(type='hidden' name='_csrf' value=csrfToken)
               button(type='submit' class='logoutBtn') Logout
-            form(action=`/users/delete/${user.id}` method='post')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              button(type='submit' class='logoutBtn') delete
         else
           span.nav-login-container
-            div
-              +validationErrorSummary(errors)
             div
               form(action='/users/login' method='post' class='loginForm')
                 input(type='hidden' name='_csrf' value=csrfToken)
@@ -41,5 +36,7 @@ html
                 span
                   button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
     div
+      div
+        +validationErrorSummary(errors)
       h2 #{title}
       block content

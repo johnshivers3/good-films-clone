@@ -153,19 +153,7 @@ router.post('/logout', (req, res) => {
   req.session.save(() => res.redirect("/"))
 });
 
-router.post(
-  '/delete/:id',
-  csrfProtection,
-  asyncHandler(async (req, res) => {
-    const userId = parseInt(req.params.id, 10);
-    const user = await db.User.findByPk(userId);
-    if(user){
-      await user.destroy();
-      logoutUser(req,res)
-      req.session.save(() => res.redirect("/"))
-    }
-  })
-);
+
 
 
 module.exports = router;

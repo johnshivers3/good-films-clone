@@ -92,6 +92,7 @@ router.post(
     }
   })
   );
+
   router.post(
     '/delete/:id',
     csrfProtection,
@@ -180,7 +181,6 @@ router.get(
         Collections,
         errors,
         csrfToken: req.csrfToken(),
-
       });
     }
   })
