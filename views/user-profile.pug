@@ -3,6 +3,7 @@ extends layout.pug
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/profile.css")
+  script(src='/javascripts/profile.js' type="module")
 
 include utils.pug
 
@@ -66,7 +67,11 @@ block content
             div
             p  Rating: #{review.dataValues.rating}
             div 
-            button(name="deleteReviewBtn")
+            button(name="deleteReviewBtn" class="delete-review-btn") Delete Review
+            div 
+            button(name="editReviewBtn" class="edit-review-btn") Edit Review
+            div 
+            button(name="saveReviewBtn" class="save-review-btn") Save Review
   div.delete-profile-div
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
     form(action=`/profile/delete/${id}` method='post')

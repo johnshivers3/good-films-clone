@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div> 
                     <label>Rating: </label>
-                    <span>${rating.value}</span>
+                    <span>${rating}</span>
                 </div>
             </div>
             <div class="reviewContent"> 
