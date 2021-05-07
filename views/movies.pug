@@ -46,17 +46,20 @@ block content
             if locals.authenticated     
                 include create-review.pug
 
-            each review in reviewsFormatted
-                .movieInfo.review-area
-                    .userAndDate 
-                        div
-                            label User: 
-                            span= review.user
-                        div 
-                            label Date: 
-                            span= review.date
-                    .reviewContent
-                        p= review.content
+            .reviewsList
+                each review in reviewsFormatted
+                    .movieInfo.review-area
+                        .userAndDate 
+                            div
+                                label User: 
+                                span= review.user
+                            div 
+                                label Date: 
+                                span= review.date
+                        .reviewContent
+                            p= review.content
+          
+
 
 
                         

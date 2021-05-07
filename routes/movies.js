@@ -15,10 +15,23 @@ const router = express.Router();
 
 const { User } = db;
 
-router.post('/reviews', asyncHandler( async (req, res) => {
+const reviewValidators = [
+    check('content')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for the content of your review'),
+        // .isLength({ min: 50 })
+        // .withMessage('First Name must not be more than 50 characters long'),
+    check('rating')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for rating')
+        // .isLength({ min: 1 , max: 5})
+        // .withMessage('Rating must be between 1 and 5')
+];
+
+router.post('/reviews', csrfProtection, asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
 
-    console.log("before creation")
+    console.log("INSIDE THE POSTTTTTTTTTTTTTTTTTT")
 
     const review = await db.Review.create({
         content,
@@ -29,25 +42,55 @@ router.post('/reviews', asyncHandler( async (req, res) => {
 
     console.log("THIS IS THE REVIEW",review)
 
-    res.status(201).json(review);
-
-
-    // const validatorErrors = [];
-
-    // if (validatorErrors.isEmpty()) {
-    //     console.log("about to save!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    //     await review.save();
-    //     res.status(201).json(review);
-    // } else {
-    //     const errors = validatorErrors.array().map((error) => error.msg);
-    //     res.render('create-review', {
-    //         title: 'Create Review',
-    //         review,
-    //         errors,
-    //         csrfToken: req.csrfToken(),
-    //     });
-    // }
+    const validatorErrors = []
+    
+    if (validatorErrors.isEmpty()) {
+        await review.save();
+        res.status(201).json(review);
+    } else {
+        const errors = validatorErrors.array().map((error) => error.msg);
+        res.render('create-review', {
+            title: 'Create Review',
+            review,
+            errors,
+            csrfToken: req.csrfToken(),
+        });
+    }
 }))
+
+// router.post('/reviews', asyncHandler( async (req, res) => {
+//     const { content, rating, movieId, userId} = req.body;
+
+//     console.log("before creation")
+
+//     const review = await db.Review.create({
+//         content,
+//         rating,
+//         movieId,
+//         userId
+//     });
+
+//     console.log("THIS IS THE REVIEW",review)
+
+//     res.status(201).json(review);
+
+
+//     // const validatorErrors = [];
+
+//     // if (validatorErrors.isEmpty()) {
+//     //     console.log("about to save!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//     //     await review.save();
+//     //     res.status(201).json(review);
+//     // } else {
+//     //     const errors = validatorErrors.array().map((error) => error.msg);
+//     //     res.render('create-review', {
+//     //         title: 'Create Review',
+//     //         review,
+//     //         errors,
+//     //         csrfToken: req.csrfToken(),
+//     //     });
+//     // }
+// }))
 
 
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {

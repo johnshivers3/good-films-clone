@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    document.getElementById('create-review').addEventListener('click', async (event) =>{
+    document.getElementById('create-review').addEventListener('click', async (event) => {
         event.preventDefault();
 
         console.log('in event listener')
@@ -50,6 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const anything = await hello.json()
         const divToPrepend = document.getElementsById("reviewBox");
         const newReview = document.createElement(div)
+        const reviewList = document.getElementsByClassName(".reviewsList");
+
+        divToPrepend.innerHTML = `
+            <div class="movieInfo review-area">
+                <div class="userAndDate">
+                    <label>User: </label>
+                    <span>${locals.user.firstName} ${locals.user.lastName}</span>
+                    
+
+                </div>
+
+
+            </div> 
+        `
 
         newReview.classList.add()
 

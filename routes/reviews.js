@@ -37,7 +37,7 @@ const reviewValidators = [
         // .withMessage('Rating must be between 1 and 5')
 ];
 
-router.post('/', csrfProtection, asyncHandler( async (req, res) => {
+router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res) => {
     const { content, rating, movieId, userId} = req.body;
 
     const review = await db.Review.create({
@@ -49,10 +49,9 @@ router.post('/', csrfProtection, asyncHandler( async (req, res) => {
 
     console.log("THIS IS THE REVIEW",review)
 
-    const validatorErrors = [];
-
+    const validatorErrors = validationResult(req)
+    
     if (validatorErrors.isEmpty()) {
-        console.log("about to save")
         await review.save();
         res.status(201).json(review);
     } else {

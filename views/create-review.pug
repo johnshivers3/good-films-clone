@@ -1,6 +1,6 @@
 +validationErrorSummary(errors)
 .body-form-container
-  form(action=`/reviews/` method='post' class='body-form create-review-box')
+  form(class='body-form create-review-box')
       input(type='hidden' name='_csrf' value= csrfToken)
       textarea(name="content" rows='4' placeholder='Write your review here!' id='content')
       .center
@@ -13,7 +13,7 @@
               option(value=5) 5
       input(type='hidden' name='movieId' value=movie.id id='movieId')
       input(type='hidden' name='userId' value=locals.user.id id='userId')
-      button(type='submit' class='center' id="cwiew") Submit
+      button(type='submit' class='center' id="create-review") Submit
 
 //- extends layout.pug
 
