@@ -6,6 +6,8 @@ html
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
     link(rel="stylesheet" href="/stylesheets/layout.css")
+    link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
+    link(rel="icon", href="/images/favicon.ico", type="image/x-icon")
     title(class = 'title') Good Films - #{title}
   body
     nav(class = 'navbar')
@@ -23,19 +25,18 @@ html
             form(action='/users/logout' method='post' class='logoutForm')
               input(type='hidden' name='_csrf' value=csrfToken)
               button(type='submit' class='logoutBtn') Logout
-            form(action=`/users/delete/${user.id}` method='post')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              button(type='submit' class='logoutBtn') delete
         else
-          span
-            +validationErrorSummary(errors)
-            form(action='/users/login' method='post' class='loginForm')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              +field('Email Address', 'emailAddress', emailAddress)
-              +field('Password', 'password', null, 'password')
-              button(type='submit' class='loginBtn') Login
-              span
-                button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
+          span.nav-login-container
+            div
+              form(action='/users/login' method='post' class='loginForm')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                +field('Email Address', 'emailAddress', emailAddress)
+                +field('Password', 'password', null, 'password')
+                button(type='submit' class='loginBtn') Login
+                span
+                  button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
     div
+      div
+        +validationErrorSummary(errors)
       h2 #{title}
       block content

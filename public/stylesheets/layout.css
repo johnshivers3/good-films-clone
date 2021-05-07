@@ -1,7 +1,8 @@
-body { 
+body {
     background-color: rgb(192, 152, 103);
     font-family: monospace;
-    
+    padding: 3%;
+
 }
 
 *:not(.logoImg){
@@ -17,6 +18,7 @@ body {
     background-color:rgb(245, 232, 215);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
 }
 
@@ -24,6 +26,10 @@ body {
     padding: 15px;
     padding-right: 25px;
     flex-direction: column;
+}
+.nav-login-container {
+    display: flex;
+    flex-direction: row;
 }
 
 .form{
