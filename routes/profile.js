@@ -186,5 +186,20 @@ router.get(
   })
 );
 
+router.post(
+  '/review/delete/:id',
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const review = await db.User.findOne({
+      where: 
+    });
+    if(userId){
+      await review.destroy();
+      req.session.save(() => res.redirect("/review"))
+    }
+  })
+);
+
 
 module.exports = router;

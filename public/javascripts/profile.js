@@ -11,15 +11,15 @@ deleteBtn.addEventListener('click', (event) => {
 
     const review = document.querySelector(".review")
 
-    const hello = await fetch(`/movies/${userId}`, {
-        method: 'DELETE',
+    const hello = await fetch(`/profile/reviews/${locals.user.id}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         
     })
 
-    review.innerHTML = hello
+    review.innerHTML = ''
 
 
 
