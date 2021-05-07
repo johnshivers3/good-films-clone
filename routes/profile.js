@@ -26,7 +26,7 @@ router.get(
     const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
 
     res.render("user-profile", {
-      title: "Profile",
+      title: "My GoodFilms",
       id,
       firstName,
       lastName,
@@ -80,7 +80,7 @@ router.post(
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render("user-profile", {
-        title: "Profile",
+        title: "My GoodFilms",
         id,
         firstName,
         lastName,
@@ -160,7 +160,7 @@ router.get(
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render("user-profile", {
-        title: "Profile",
+        title: "My GoodFilms",
         id,
         firstName,
         lastName,

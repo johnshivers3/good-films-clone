@@ -4,9 +4,35 @@ h1{
 
 h3 {
     text-align: center;
-    font-size: xx-large;
+    font-size: x-large;
+    text-decoration: underline;
+}
+h2{
+    font-weight: bold;
+    font-size: 14px;
 }
 
+.collection_container > h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    font-size: large;
+    margin: auto 10px;
+}
+
+.edit-collection {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.edit-collection > form {
+    margin: 2px;
+    height: 25px;
+}
 .create-collection-label {
     margin: 5px;
 }
@@ -56,11 +82,54 @@ h3 {
     width: 35vw;
 
   }
+.collection-form {
+    border: 1px solid black;
+    padding: 10px;
+    padding-top: 15px;
+    box-shadow: 4px 4px 3px 2px rgba(199, 109, 199, 0.575);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35vw;
+}
+.rename-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.collection-form > div{
+    margin: 5px;
+}
 
-.body-form-container {
+.collection-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px;
+
+}
+.delete-profile-div{
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-around;
+    align-items: center;
+    margin: 15vh auto;
+    height: fit-content;
+    padding: 10px;
+    padding-top: 15px;
+    color: red;
+    font-size: large;
+    background-color:rgb(245, 232, 215);
+    border: 1px solid black;
+    box-shadow: 4px 4px 3px 2px rgba(199, 109, 199, 0.575);
+    border-radius: 5px;
+
+}
+
+
+.delete-profile-btn{
+    margin: 5px;
 }
 
 .docu{
@@ -112,15 +181,4 @@ h3 {
     flex-direction: column;
     align-items: center;
     font-size: small;
-}
-
-h2{
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.collection_container > h2 {
-    text-align: center;
-    padding-bottom: 8px;
-    font-size: x-large;
 }

@@ -11,27 +11,16 @@ block content
   div
     h3 Your Collections
     div
-      +validationErrorSummary(errors)
-      .body-form-container
-        form(action=`/profile/${id}` method='post' class='body-form')
-          h4.create-collection-label= `Make a new Collection`
-          div
-          label(for='name') Name:
-          input(type="text" name='name' value="")
-          input(type='hidden' name='_csrf' value=csrfToken)
-          input(type='hidden' name='userId' value=userId)
-          button(type='submit') Submit
-    div
       each collection in Collections
         div(class='collection_container')
           h2 #{collection.dataValues.name}
-          div
-            form(action=`/profile/collection/edit/${collection.id}` _method='post')
-              input(type="text", name="name" )
-              button(type='submit' class='logoutBtn') edit
-            form(action=`/profile/collection/delete/${collection.id}` method='post')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              button(type='submit' class='logoutBtn') delete
+            div.edit-collection
+              form(action=`/profile/collection/edit/${collection.id}` _method='post')
+                input(type="text", name="name" placeholder="Rename this collection")
+                button(type='submit' class='renameCol') Rename
+              form(action=`/profile/collection/delete/${collection.id}` method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                button(type='submit' class='deleteCol') Delete
           div(class="docu")
             div(class='asd')
               h2 Free Solo
@@ -53,6 +42,17 @@ block content
               h2 The Social Dilemma
               a(href="../movies/18")
                 img(src="/Images/theSocialDilemma.jpg" alt="The Social Dilemma" class="tSD")
+    div
+      +validationErrorSummary(errors)
+      .collection-form-container
+        form(action=`/profile/${id}` method='post' class='collection-form')
+          div
+            h4.create-collection-label= `Create a new Collection`
+            input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            input(type='hidden' name='userId' value=userId)
+          div
+            button(type='submit') Create Collection
   div
     h3 Recent Reviews
     div
@@ -65,3 +65,8 @@ block content
             p  Review: #{review.dataValues.content}
             div
             p  Rating: #{review.dataValues.rating}
+  div.delete-profile-div
+    form(action=`/users/delete/${user.id}` method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
+    button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE

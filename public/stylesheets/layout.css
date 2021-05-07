@@ -1,7 +1,8 @@
-body { 
+body {
     background-color: rgb(192, 152, 103);
     font-family: monospace;
-    
+    padding: 3%;
+
 }
 
 *:not(.logoImg){
