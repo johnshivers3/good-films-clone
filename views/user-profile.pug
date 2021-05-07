@@ -25,6 +25,13 @@ block content
       each collection in Collections
         div(class='collection_container')
           h2 #{collection.dataValues.name}
+          div
+            form(action=`/profile/collection/edit/${collection.id}` _method='post')
+              input(type="text", name="name" )
+              button(type='submit' class='logoutBtn') edit
+            form(action=`/profile/collection/delete/${collection.id}` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              button(type='submit' class='logoutBtn') delete
           div(class="docu")
             div(class='asd')
               h2 Free Solo
