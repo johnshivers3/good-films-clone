@@ -21,7 +21,7 @@ Good films is a website where you can become a user where you are able to share 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Visit Good-Films at
-https://good-films-app.herokuapp.com/
+https://good-films.herokuapp.com/
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Diagram of database schema 
