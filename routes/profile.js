@@ -1,7 +1,7 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const db = require("../db/models");
-const {loginUser, logoutUser} = require('../auth')
+const { logoutUser} = require('../auth')
 
 const { asyncHandler, csrfProtection } = require("./utils");
 
@@ -10,8 +10,7 @@ const router = express.Router();
 
 router.post(
   "/:collectionId/:movieId", asyncHandler(async(req, res) => {
-    const data = req.body
-    console.log(data);
+
     try {
       await db.Movies_Collection.create({
         movieId: req.body.movieId,
@@ -19,7 +18,7 @@ router.post(
       })
       res.redirect(201,'back')
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     }
   })
 )
