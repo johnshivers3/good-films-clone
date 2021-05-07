@@ -97,12 +97,6 @@ router.post('/register', csrfProtection, userValidators,
     }
   }));
 
-// router.get('/login', csrfProtection, (req, res) => {
-//   res.render('index', {
-//     title: 'Login',
-//     csrfToken: req.csrfToken(),
-//   });
-// });
 
 const loginValidators = [
   check('emailAddress')

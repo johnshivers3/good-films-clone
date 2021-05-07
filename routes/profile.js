@@ -1,8 +1,7 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const db = require("../db/models");
-const url = require("url");
-const querystring = require("querystring");
+const {loginUser, logoutUser} = require('../auth')
 
 const { asyncHandler, csrfProtection } = require("./utils");
 
@@ -92,22 +91,35 @@ router.post(
       });
     }
   })
-);
+  );
+  router.post(
+    '/delete/:id',
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+      const userId = parseInt(req.params.id, 10);
+      const user = await db.User.findByPk(userId);
+      if(user){
+        await user.destroy();
+        logoutUser(req,res)
+        req.session.save(() => res.redirect("/"))
+      }
+    })
+  );
 
-router.post(
-  "/:collectionId/:movieId",
-  asyncHandler(async (req, res) => {
-    const collectionId = parseInt(req.params.collectionId, 10);
-    const movieId = parseInt(req.params.movieId, 10);
+  router.post(
+    "/:collectionId/:movieId",
+    asyncHandler(async (req, res) => {
+      const collectionId = parseInt(req.params.collectionId, 10);
+      const movieId = parseInt(req.params.movieId, 10);
 
-    try {
-      console.log("about to create a collection connection");
-      await db.Movies_Collection.create({
-        collectionId,
-        movieId,
-      });
-      res.status(201).json({ comment: "hello" });
-    } catch {
+      try {
+        console.log("about to create a collection connection");
+        await db.Movies_Collection.create({
+          collectionId,
+          movieId,
+        });
+        res.status(201).json({ comment: "hello" });
+      } catch {
       throw new Error("Unable to create Movies_Collection connection!!! ");
     }
   })
@@ -173,5 +185,6 @@ router.get(
     }
   })
 );
+
 
 module.exports = router;

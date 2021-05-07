@@ -29,15 +29,17 @@ html
               input(type='hidden' name='_csrf' value=csrfToken)
               button(type='submit' class='logoutBtn') delete
         else
-          span
-            +validationErrorSummary(errors)
-            form(action='/users/login' method='post' class='loginForm')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              +field('Email Address', 'emailAddress', emailAddress)
-              +field('Password', 'password', null, 'password')
-              button(type='submit' class='loginBtn') Login
-              span
-                button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
+          span.nav-login-container
+            div
+              +validationErrorSummary(errors)
+            div
+              form(action='/users/login' method='post' class='loginForm')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                +field('Email Address', 'emailAddress', emailAddress)
+                +field('Password', 'password', null, 'password')
+                button(type='submit' class='loginBtn') Login
+                span
+                  button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
     div
       h2 #{title}
       block content

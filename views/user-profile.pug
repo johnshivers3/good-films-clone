@@ -12,7 +12,7 @@ block content
     h3 Your Collections
     div
       each collection in Collections
-        div(class='collection_container')
+        div(class='collection-container')
           h2 #{collection.dataValues.name}
             div.edit-collection
               form(action=`/profile/collection/edit/${collection.id}` _method='post')
@@ -66,7 +66,7 @@ block content
             div
             p  Rating: #{review.dataValues.rating}
   div.delete-profile-div
-    form(action=`/users/delete/${user.id}` method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
-    button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE
+    form(action=`/profile/delete/${id}` method='post')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE

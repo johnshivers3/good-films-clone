@@ -12,7 +12,7 @@ h2{
     font-size: 14px;
 }
 
-.collection_container > h2 {
+.collection-container > h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,7 +37,7 @@ h2{
     margin: 5px;
 }
 
-.collection_container{
+.collection-container{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
