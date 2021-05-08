@@ -2,6 +2,7 @@ extends layout.pug
 
 append head
   link(rel="stylesheet" href="/stylesheets/profile.css")
+  script(src='/javascripts/profile.js' type="module")
 
 include utils.pug
 
@@ -41,14 +42,21 @@ block content
     h3 Recent Reviews
     div
       each review in Reviews
-        div(class='review')
+        div(id=`review-${review.id}` class='review')
+          input(type="hidden" value=review.id class="reviewIddd" id=`id-${review.id}`)
           div
             img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content
             h4 Title: #{review.Movie.title}
-            p  Review: #{review.content}
+            p(id=`edits-${review.id}`)  Review: #{review.content}
             div
             p  Rating: #{review.rating}
+            div 
+            button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
+            div 
+            button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
+            div 
+            button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
   div.delete-profile-div
     label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
     form(action=`/profile/delete/${id}` method='post')

@@ -58,15 +58,17 @@ router.get(
     let reviewsFormatted = [];
 
     reviews.forEach((review, i) => {
-      const split = review.createdAt.toString().split(" ");
-      const dateFormatted = `${split[0]} ${split[1]} ${split[2]} ${split[3]}`;
+        const split = review.createdAt.toString().split(' ');
+        const dateFormatted = `${split[0]} ${split[1]} ${split[2]} ${split[3]}`
 
-      const newReview = {
-        user: `${review.User.firstName} ${review.User.lastName}`,
-        date: dateFormatted,
-        content: review.content,
-      };
-      reviewsFormatted.push(newReview);
+        const newReview = {
+            user: `${review.User.firstName} ${review.User.lastName}`,
+            date: dateFormatted,
+            rating: review.rating,
+            content: review.content
+        }
+        reviewsFormatted.push(newReview);
+
     });
 
     reviewsFormatted.reverse();
