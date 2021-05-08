@@ -1,7 +1,7 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const db = require("../db/models");
-const {loginUser, logoutUser} = require('../auth')
+const { logoutUser} = require('../auth')
 
 const { asyncHandler, csrfProtection } = require("./utils");
 
@@ -19,10 +19,8 @@ router.get(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
     });
-
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     res.render("user-profile", {
       title: "My GoodFilms",
@@ -61,10 +59,9 @@ router.post(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-      // include: [{ all: true }]
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const collection = await db.Collection.build({
       name,
@@ -114,7 +111,6 @@ router.post(
       const movieId = parseInt(req.params.movieId, 10);
 
       try {
-        console.log("about to create a collection connection");
         await db.Movies_Collection.create({
           collectionId,
           movieId,
@@ -158,7 +154,7 @@ router.get(
       ],
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const validatorErrors = validationResult(req);
 
