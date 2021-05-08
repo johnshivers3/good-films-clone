@@ -59,7 +59,7 @@ block content
     div
       each review in Reviews
         div(id=`review-${review.id}` class='review')
-          input(type="hidden" value=review.id class="reviewIddd")
+          input(type="hidden" value=review.id class="reviewIddd" id=`id-${review.id}`)
           div
             img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content

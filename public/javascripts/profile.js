@@ -47,33 +47,29 @@ editBtns.forEach(button => {
     });
 });
 
-saveBtns.forEach(button => {
-    button.addEventListener('click', async (event) => {
-    
-        // const deleteBtn = document.getElementsByClassName("delete-review-btn")[0]
+    saveBtns.forEach(button => {
+        button.addEventListener('click', async (event) => {
         
-        let idNumber = event.target.id.split("-")[1]
-        
-        console.log(event.target.id)
+            let idNumber = event.target.id.split("-")[1]
 
-        const updated = document.getElementById(`update-textarea-${idNumber}`)
+            const updated = document.getElementById(`update-textarea-${idNumber}`).value
 
-        console.log(updated)
-        
-        await fetch(`/profile/review/edit/${idNumber}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }  
-        })
-        
-        // const review = document.getElementById(`review-${idNumber}`)
-        // review.innerHTML = ''
-        
+            console.log(updated)
+            
+            await fetch(`/profile/review/edit/${idNumber}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: updated
+                }) 
+            }) 
+            const updatedContent = document.getElementById(`edits-${idNumber}`)
+            updatedContent.innerText = "Review: " + updated 
+        });
+
     });
-
-
-});
 
 
 
