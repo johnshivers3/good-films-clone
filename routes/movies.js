@@ -102,7 +102,6 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         
     // }
     for (collection of bigCollections) {
-        console.log('this is each collection..................', collection);
         let bool = false
         for (movieLoop of collection.Movies) {
             if (movieLoop.id === movie.id) {
@@ -114,9 +113,6 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
             dropDownCollections.push(collection);
         }
     }
-    console.log('bigCollections', bigCollections)
-    console.log('dropDownCollections', dropDownCollections);
-    console.log('listCollections', listCollections);
 
     res.render('movies', {
         movie,

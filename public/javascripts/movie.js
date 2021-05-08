@@ -1,7 +1,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    document.getElementById('addToCollection').addEventListener('click', async (event) =>{
+    const liElements = document.getElementsByClassName('collectionListItems');
+    console.log(liElements);
+    if (liElements.length > 0) {
+        document.getElementById('inCollectionsArea').classList.remove('hidden');
+    }
+
+    // ADDing to Collection
+    document.querySelector('.addToCollection').addEventListener('click', async (event) =>{
         event.preventDefault();
 
         const collectionId = document.getElementById('collectionSelect').value;
@@ -18,8 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         })
 
-        const div = document.getElementById('addToCollectionsDiv');
-        div.innerHTML = '';
+        // add to list 
+        const liElements = document.getElementsByClassName('collectionListItems');
+        if (liElements.length === 0) {
+            document.getElementById('inCollectionsArea').classList.add('show');
+        }
+        const li = document.createElement('li');
+        li.setAttribute('id', `list-${collectionId}`)
+        li.classList.add('collectionListItems')
+        const option = document.getElementById(`drop-down-${collectionId}`);
+        const collectionName = option.innerText
+        li.innerText = collectionName;
+
+        const button = document.createElement('button')
+        button.setAttribute('id', `${collectionId}/${collectionName}/${movieId}`);
+        button.innerText = "Remove"
+        li.append(button);
+
+        option.remove();
+        
+        document.getElementById('collectionList').append(li);
+
+
+        // const div = document.getElementById('addToCollectionsDiv');
+        // div.innerHTML = '';
     })
 
 
@@ -83,9 +112,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    document.getElementById('collectionId').addEventListener('click', () => {
-        const collectionId = document.getelement
-    })
+    const deletes = document.getElementsByClassName('delete')
+    
+    console.log(deletes)
+    for (let i = 0; i < deletes.length; i++) {
+        deletes[i].addEventListener('click', async (event) => {
+            const call = '/profile/delete/' + event.target.id;
+
+            const array = event.target.id.split('/')
+            const collectionId = array[0]
+            const collectionName = array[1]
+
+            await fetch(call, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('got there ')
+
+            document.getElementById(`list-${collectionId}`).remove();
+
+            const collectionSelect = document.getElementById('collectionSelect');
+            const newDropDown = document.createElement('option')
+            newDropDown.value = collectionId;
+            newDropDown.innerText = collectionName;
+
+            collectionSelect.prepend(newDropDown)
+
+            const collectionListItems = document.getElementsByClassName('collectionListItems');
+            console.log(collectionListItems)
+            if (collectionListItems.length === 0) {
+                document.getElementById('inCollectionsArea').classList.add('hidden')
+            }
+
+
+        })
+
+        
+    }
+
+
+
 
 
 });

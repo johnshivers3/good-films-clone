@@ -36,19 +36,17 @@ block content
                             if bigCollections
                                 select#collectionSelect
                                     each collection in dropDownCollections
-                                        option(name='current' value=collection.id)= collection.name
+                                        option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
                                     form(action=`/${movieId}` _method='post')
                                         input(type='hidden' id='movieId' value=movie.id)
-                                        button#addToCollection Add to Collection
+                                        button(class='addToCollection' id=`${collection.name}`) Add to Collection
                                 br
-                                br
-                                h4 In collections:
-                                    ul 
-                                        each collection in listCollections 
-                                            li= collection.name
-                                                form(action=`/${collection.id}/${movie.id}`)
-                                                    input(type='hidden' id='collectionId' value=collection.id)
-                                                    button(id='deleteCollection') Remove
+                                #inCollectionsArea.hidden
+                                    h4 In collections:
+                                        ul#collectionList 
+                                            each collection in listCollections 
+                                                li(id=`list-${collection.id}` class='collectionListItems')= collection.name
+                                                    button(id=`${collection.id}/${collection.name}/${movie.id}` class='delete') Remove
                             if !bigCollections
                                 a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection!
 
