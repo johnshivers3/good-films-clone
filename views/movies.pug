@@ -34,12 +34,13 @@ block content
                     div#addToCollectionsDiv
                         form
                             if bigCollections
-                                select#collectionSelect
-                                    each collection in dropDownCollections
-                                        option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
-                                    form(action=`/${movieId}` _method='post')
-                                        input(type='hidden' id='movieId' value=movie.id)
-                                        button(class='addToCollection' id=`${collection.name}`) Add to Collection
+                                #addArea.show
+                                    select#collectionSelect
+                                        each collection in dropDownCollections
+                                            option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
+                                        form(action=`/${movieId}` _method='post')
+                                            input(type='hidden' id='movieId' value=movie.id)
+                                            button(class='addToCollection' id=`${collection.name}`) Add to Collection
                                 br
                                 #inCollectionsArea.hidden
                                     h4 In collections:

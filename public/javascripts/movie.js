@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('inCollectionsArea').classList.remove('hidden');
     }
 
+    const dropDownListItemsBefore = document.getElementsByClassName('dropDownListItems');
+
+    if (dropDownListItemsBefore.length === 0) {
+        const addArea = document.getElementById('addArea');
+        addArea.classList.remove('show');
+        addArea.classList.add('hidden');
+    }
+
     // ADDing to Collection
     document.querySelector('.addToCollection').addEventListener('click', async (event) =>{
         event.preventDefault();
@@ -45,10 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
         option.remove();
         
         document.getElementById('collectionList').append(li);
+        
+        const dropDownListItems = document.getElementsByClassName('dropDownListItems');
+
+        if (dropDownListItems.length === 0) {
+            const collectionSelect = document.getElementById('addArea');
+            addArea.classList.add('hidden');
+            addArea.classList.remove('show');
+        }
 
 
-        // const div = document.getElementById('addToCollectionsDiv');
-        // div.innerHTML = '';
     })
 
 
@@ -138,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newDropDown = document.createElement('option')
             newDropDown.value = collectionId;
             newDropDown.innerText = collectionName;
+            newDropDown.classList.add('dropDownListItems')
 
             collectionSelect.prepend(newDropDown)
 
@@ -145,6 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(collectionListItems)
             if (collectionListItems.length === 0) {
                 document.getElementById('inCollectionsArea').classList.add('hidden')
+            }
+
+            const dropDownListItemsYea = document.getElementsByClassName('dropDownListItems');
+
+            if (dropDownListItemsYea.length !== 0) {
+                const addArea = document.getElementById('addArea');
+                addArea.classList.remove('hidden');
+                addArea.classList.add('show');
             }
 
 
