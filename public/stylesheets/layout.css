@@ -11,7 +11,7 @@ body {
 
 .navbar {
     position: static;
-    top: 0;
+    /* top: 0; */
     width: 100%;
     left: 0;
     height: 100px;
@@ -20,6 +20,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+}
+
+.footer {
+    bottom: 0;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 
 .loginForm{
@@ -57,4 +63,14 @@ input{
     font: 100 10px Arial;
     border: 1px solid black;
     border-radius: 2.5px;
+}
+
+.names {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar {
+    border-radius: 10px;
 }

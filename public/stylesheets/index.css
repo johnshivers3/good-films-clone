@@ -7,13 +7,14 @@ h1{
 .horror,
 .action,
 .comedy {
-    height: 200px;
+    /* height: 200px; */
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     padding: 35px;
     border: 1px solid black ;
+    border-radius: 10px;
 }
 
 .freeSolo,
@@ -37,8 +38,9 @@ h1{
 .ted,
 .spaceBalls{
     padding: 5px;
-    width: 75px;
-    height: 125px;
+    /* width: 75px; */
+    width: 80%;
+    /* height: 125px; */
 }
 
 .freeSolo:hover,
@@ -61,8 +63,9 @@ h1{
 .rh2:hover,
 .ted:hover,
 .spaceBalls:hover{
-    width:125px;
-    height:200px;
+    /* width:125px;
+    height:200px; */
+    width: 100%;
     transition: 1;
     margin: 0;
     padding: 0;
