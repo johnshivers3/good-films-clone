@@ -69,7 +69,8 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
             user: `${review.User.firstName} ${review.User.lastName}`,
             date: dateFormatted,
             rating: review.rating,
-            content: review.content
+            content: review.content,
+            userId: review.User.id
         }
         reviewsFormatted.push(newReview);
 
