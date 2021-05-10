@@ -29,7 +29,8 @@ block content
               each movie in collection.Movies
                 div(class='asd')
                   h2=movie.title
-                  img(src=movie.image alt=movie.title class="movies")
+                  a(href=`/movies/${movie.id}`)
+                    img(src=movie.image alt=movie.title class="movies")
     div
       +validationErrorSummary(errors)
       .collection-form-container
