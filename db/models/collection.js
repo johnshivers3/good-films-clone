@@ -16,8 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       through: 'Movies_Collection',
       otherKey: 'movieId',
       foreignKey: 'collectionId',
+      // onDelete: 'cascade',
+      // hooks: true
      };
-     Collection.belongsToMany(models.Movie, columnMapping);
+    Collection.belongsToMany(models.Movie, columnMapping);
+    Collection.hasMany(models.Movies_Collection, {foreignKey: 'collectionId', onDelete: 'cascade', hooks: true})
   };
   return Collection;
 };
