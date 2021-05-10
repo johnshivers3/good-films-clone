@@ -22,6 +22,10 @@ body {
     padding: 10px;
 }
 
+.footer {
+
+}
+
 .loginForm{
     padding: 15px;
     padding-right: 25px;
@@ -57,4 +61,10 @@ input{
     font: 100 10px Arial;
     border: 1px solid black;
     border-radius: 2.5px;
+}
+
+.names {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
 }
