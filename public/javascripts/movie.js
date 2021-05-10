@@ -1,22 +1,74 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Helper Functions
+    const addDeleteListener = button => {
+        button.addEventListener('click', async (event) => {
+            const call = '/profile/delete/' + event.target.id;
 
-    // To-Do Right after the page loads. 
+            const array = event.target.id.split('/')
+            const collectionId = array[0]
+            const collectionName = array[1]
 
-    const liElements = document.getElementsByClassName('collectionListItems');
-    console.log(liElements);
-    if (liElements.length > 0) {
-        document.getElementById('inCollectionsArea').classList.remove('hidden');
+            await fetch(call, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('got there ')
+
+            document.getElementById(`list-${collectionId}`).remove();
+
+            const collectionSelect = document.getElementById('collectionSelect');
+            const newDropDown = document.createElement('option')
+            newDropDown.value = collectionId;
+            newDropDown.innerText = collectionName;
+            newDropDown.classList.add('dropDownListItems')
+            newDropDown.setAttribute('id', `drop-down-${collectionId}`)
+
+            collectionSelect.prepend(newDropDown)
+
+            const collectionListItems = document.getElementsByClassName('collectionListItems');
+            console.log(collectionListItems)
+            if (collectionListItems.length === 0) {
+                document.getElementById('inCollectionsArea').classList.add('hidden')
+            }
+
+            const dropDownListItemsYea = document.getElementsByClassName('dropDownListItems');
+
+            if (dropDownListItemsYea.length !== 0) {
+                const addArea = document.getElementById('addArea');
+                addArea.classList.remove('hidden');
+                addArea.classList.add('show');
+            }
+
+
+        })
+    }
+    const toDoAfterLoading = () => {
+        const liElements = document.getElementsByClassName('collectionListItems');
+        if (liElements.length > 0) {
+            document.getElementById('inCollectionsArea').classList.remove('hidden');
+        }
+
+        const dropDownListItemsBefore = document.getElementsByClassName('dropDownListItems');
+
+        if (dropDownListItemsBefore.length === 0) {
+            const addArea = document.getElementById('addArea');
+            addArea.classList.remove('show');
+            addArea.classList.add('hidden');
+        }
+
+        const deletes = document.getElementsByClassName('delete')
+        for (let i = 0; i < deletes.length; i++) {
+            addDeleteListener(deletes[i]);
+        }
     }
 
-    const dropDownListItemsBefore = document.getElementsByClassName('dropDownListItems');
-
-    if (dropDownListItemsBefore.length === 0) {
-        const addArea = document.getElementById('addArea');
-        addArea.classList.remove('show');
-        addArea.classList.add('hidden');
-    }
+    // Setup Page
+    toDoAfterLoading();
 
     // Adding to Collection
     document.querySelector('.addToCollection').addEventListener('click', async (event) =>{
@@ -51,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = document.createElement('button')
         button.setAttribute('id', `${collectionId}/${collectionName}/${movieId}`);
         button.innerText = "Remove"
+        addDeleteListener(button);
         li.append(button);
 
         option.remove();
@@ -68,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
-
+    // Create Review Button
     document.getElementById('create-review').addEventListener('click', async (event) => {
         event.preventDefault();
 
@@ -128,60 +181,5 @@ document.addEventListener('DOMContentLoaded', () => {
         content.value = '';
 
     });
-
-    const deletes = document.getElementsByClassName('delete')
-    
-    console.log(deletes)
-    for (let i = 0; i < deletes.length; i++) {
-        deletes[i].addEventListener('click', async (event) => {
-            const call = '/profile/delete/' + event.target.id;
-
-            const array = event.target.id.split('/')
-            const collectionId = array[0]
-            const collectionName = array[1]
-
-            await fetch(call, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            console.log('got there ')
-
-            document.getElementById(`list-${collectionId}`).remove();
-
-            const collectionSelect = document.getElementById('collectionSelect');
-            const newDropDown = document.createElement('option')
-            newDropDown.value = collectionId;
-            newDropDown.innerText = collectionName;
-            newDropDown.classList.add('dropDownListItems')
-            newDropDown.setAttribute('id', `drop-down-${collectionId}`)
-
-            collectionSelect.prepend(newDropDown)
-
-            const collectionListItems = document.getElementsByClassName('collectionListItems');
-            console.log(collectionListItems)
-            if (collectionListItems.length === 0) {
-                document.getElementById('inCollectionsArea').classList.add('hidden')
-            }
-
-            const dropDownListItemsYea = document.getElementsByClassName('dropDownListItems');
-
-            if (dropDownListItemsYea.length !== 0) {
-                const addArea = document.getElementById('addArea');
-                addArea.classList.remove('hidden');
-                addArea.classList.add('show');
-            }
-
-
-        })
-
-        
-    }
-
-
-
-
 
 });
