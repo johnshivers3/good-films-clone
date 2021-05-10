@@ -36,7 +36,7 @@ block content
                     div#addToCollectionsDiv
                         form
                             if bigCollections
-                                #addArea.hidden
+                                #addArea
                                     select#collectionSelect
                                         each collection in dropDownCollections
                                             option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
@@ -44,10 +44,10 @@ block content
                                             input(type='hidden' id='movieId' value=movie.id)
                                             button(class='addToCollection' id=`${collection.name}`) Add to Collection
                                 br
-                                #inCollectionsArea.hidden
+                                #inCollectionsArea
                                     h4 In collections:
-                                        ul#collectionList 
-                                            each collection in listCollections 
+                                        ul#collectionList
+                                            each collection in listCollections
                                                 li(id=`list-${collection.id}` class='collectionListItems')= collection.name
                                                     button(id=`${collection.id}/${collection.name}/${movie.id}` class='delete') Remove
                             if !bigCollections
@@ -61,7 +61,7 @@ block content
                 input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
                 include create-review.pug
             if !locals.authenticated
-                p Make an account to add your own reviews! 
+                p Make an account to add your own reviews!
 
             #reviewsList
             h4 Check out recent Reviews:
@@ -76,8 +76,8 @@ block content
                                 div
                                     label Date:
                                     span= review.date
-                                div 
-                                    label Rating: 
+                                div
+                                    label Rating:
                                     span= review.rating
                             .reviewContent
                                 p= review.content
