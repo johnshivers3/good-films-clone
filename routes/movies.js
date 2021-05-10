@@ -49,15 +49,16 @@ router.post(
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
+    // Grab info for the movie and the list of reviews 
     const movie = await db.Movie.findOne({
       where: { id: movieId },
     });
-
     const reviews = await db.Review.findAll({
       where: { movieId },
       include: User,
     });
 
+    // Formatting reviews
     let reviewsFormatted = [];
 
     reviews.forEach((review, i) => {
@@ -76,34 +77,30 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
 
     reviewsFormatted.reverse();
 
-
-    const bigCollections = await db.Collection.findAll({
-        where: {
-            userId: req.session.auth.userId,
-        }, 
-        include: db.Movie
-    })
-
-    // console.log(collections[0].Movies)
-
-
+    // Setup variables for collections 
+    let bigCollections;
     let dropDownCollections = [];
     let listCollections = [];
 
-    // for (let i = 0; i < bigCollections.length; i++) {
-        
-        
-    // }
-    for (collection of bigCollections) {
-        let bool = false
-        for (movieLoop of collection.Movies) {
-            if (movieLoop.id === movie.id) {
-                listCollections.push(collection);
-                bool = true;
-            } 
-        }
-        if (!bool) {
-            dropDownCollections.push(collection);
+    if (req.session.auth) {
+        bigCollections = await db.Collection.findAll({
+            where: {
+                userId: req.session.auth.userId,
+            }, 
+            include: db.Movie
+        })
+    
+        for (collection of bigCollections) {
+            let bool = false
+            for (movieLoop of collection.Movies) {
+                if (movieLoop.id === movie.id) {
+                    listCollections.push(collection);
+                    bool = true;
+                } 
+            }
+            if (!bool) {
+                dropDownCollections.push(collection);
+            }
         }
     }
 

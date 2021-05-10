@@ -36,7 +36,7 @@ block content
                     div#addToCollectionsDiv
                         form
                             if bigCollections
-                                #addArea.show
+                                #addArea.hidden
                                     select#collectionSelect
                                         each collection in dropDownCollections
                                             option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
@@ -61,20 +61,23 @@ block content
                 include create-review.pug
 
             #reviewsList
-                each review in reviewsFormatted
-                    .movieInfo.review-area
-                        .userAndDate
-                            div
-                                label User:
-                                span= review.user
-                            div
-                                label Date:
-                                span= review.date
-                            div 
-                                label Rating: 
-                                span= review.rating
-                        .reviewContent
-                            p= review.content
+                if reviewsFormatted
+                    each review in reviewsFormatted
+                        .movieInfo.review-area
+                            .userAndDate
+                                div
+                                    label User:
+                                    a(href=`/profile/1`)
+                                        span= review.user
+                                div
+                                    label Date:
+                                    span= review.date
+                                div 
+                                    label Rating: 
+                                    span= review.rating
+                            .reviewContent
+                                p= review.content
+                    p Sign up for an account and make a review! 
 
 
 

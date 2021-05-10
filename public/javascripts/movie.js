@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         })
     }
-    const toDoAfterLoading = () => {
+    const pageSetupForUser = () => {
         const liElements = document.getElementsByClassName('collectionListItems');
         if (liElements.length > 0) {
             document.getElementById('inCollectionsArea').classList.remove('hidden');
@@ -68,97 +68,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Setup Page
-    toDoAfterLoading();
+    if (document.querySelector('.welcome')) {
+        pageSetupForUser();
 
-    // Adding to Collection
-    document.querySelector('.addToCollection').addEventListener('click', async (event) =>{
-        event.preventDefault();
+        // Adding to Collection
+        document.querySelector('.addToCollection').addEventListener('click', async (event) => {
+            event.preventDefault();
 
-        const collectionId = document.getElementById('collectionSelect').value;
-        const movieId = document.getElementById('movieId').value;
+            const collectionId = document.getElementById('collectionSelect').value;
+            const movieId = document.getElementById('movieId').value;
 
-        await fetch(`/profile/${collectionId}/${movieId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                'collectionId': collectionId,
-                'movieId': movieId
+            await fetch(`/profile/${collectionId}/${movieId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'collectionId': collectionId,
+                    'movieId': movieId
+                })
             })
-        })
 
-        // add to list 
-        const liElements = document.getElementsByClassName('collectionListItems');
-        if (liElements.length === 0) {
-            document.getElementById('inCollectionsArea').classList.add('show');
-        }
-        const li = document.createElement('li');
-        li.setAttribute('id', `list-${collectionId}`)
-        li.classList.add('collectionListItems')
-        const option = document.getElementById(`drop-down-${collectionId}`);
-        const collectionName = option.innerText
-        li.innerText = collectionName;
+            // add to list 
+            const liElements = document.getElementsByClassName('collectionListItems');
+            if (liElements.length === 0) {
+                document.getElementById('inCollectionsArea').classList.add('show');
+            }
+            const li = document.createElement('li');
+            li.setAttribute('id', `list-${collectionId}`)
+            li.classList.add('collectionListItems')
+            const option = document.getElementById(`drop-down-${collectionId}`);
+            const collectionName = option.innerText
+            li.innerText = collectionName;
 
-        const button = document.createElement('button')
-        button.setAttribute('id', `${collectionId}/${collectionName}/${movieId}`);
-        button.innerText = "Remove"
-        addDeleteListener(button);
-        li.append(button);
+            const button = document.createElement('button')
+            button.setAttribute('id', `${collectionId}/${collectionName}/${movieId}`);
+            button.innerText = "Remove"
+            addDeleteListener(button);
+            li.append(button);
 
-        option.remove();
-        
-        document.getElementById('collectionList').append(li);
-        
-        const dropDownListItems = document.getElementsByClassName('dropDownListItems');
+            option.remove();
 
-        if (dropDownListItems.length === 0) {
-            const collectionSelect = document.getElementById('addArea');
-            addArea.classList.add('hidden');
-            addArea.classList.remove('show');
-        }
+            document.getElementById('collectionList').append(li);
 
+            const dropDownListItems = document.getElementsByClassName('dropDownListItems');
 
-    })
+            if (dropDownListItems.length === 0) {
+                const collectionSelect = document.getElementById('addArea');
+                addArea.classList.add('hidden');
+                addArea.classList.remove('show');
+            }
 
-    // Create Review Button
-    document.getElementById('create-review').addEventListener('click', async (event) => {
-        event.preventDefault();
-
-        console.log('in event listener')
-
-        const rating = document.getElementById('rating').value;
-        const content = document.getElementById('content')
-        const userId = document.getElementById('userId').value;
-        const movieId = document.getElementById('movieId').value;
-        const userName = document.getElementById('userName').value;
-
-
-        const data = {
-            rating,
-            content: content.value,
-            userId,
-            movieId
-        }
-
-        const hello = await fetch(`/movies/reviews`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
 
         })
 
-        const anything = await hello.json()
-        const divToPrepend = document.getElementById("reviewsList");
-        const newReview = document.createElement("div")
-        // const reviewList = document.getElementsByClassName(".reviewsList");
+        // Create Review Button
+        document.getElementById('create-review').addEventListener('click', async (event) => {
+            event.preventDefault();
 
-        const date = new Date();
-        const datePlus = `${date.toDateString()}`
+            console.log('in event listener')
 
-        newReview.innerHTML = `
+            const rating = document.getElementById('rating').value;
+            const content = document.getElementById('content')
+            const userId = document.getElementById('userId').value;
+            const movieId = document.getElementById('movieId').value;
+            const userName = document.getElementById('userName').value;
+
+
+            const data = {
+                rating,
+                content: content.value,
+                userId,
+                movieId
+            }
+
+            const hello = await fetch(`/movies/reviews`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+
+            })
+
+            const anything = await hello.json()
+            const divToPrepend = document.getElementById("reviewsList");
+            const newReview = document.createElement("div")
+            // const reviewList = document.getElementsByClassName(".reviewsList");
+
+            const date = new Date();
+            const datePlus = `${date.toDateString()}`
+
+            newReview.innerHTML = `
         <div class="movieInfo review-area">
             <div class="userAndDate">
                 <div>
@@ -180,10 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         `
 
-        divToPrepend.prepend(newReview)
+            divToPrepend.prepend(newReview)
 
-        content.value = '';
+            content.value = '';
 
-    });
+        });
+
+    }
+
+
+
 
 });
