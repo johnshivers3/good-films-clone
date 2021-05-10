@@ -1,6 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
+    // To-Do Right after the page loads. 
+
     const liElements = document.getElementsByClassName('collectionListItems');
     console.log(liElements);
     if (liElements.length > 0) {
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addArea.classList.add('hidden');
     }
 
-    // ADDing to Collection
+    // Adding to Collection
     document.querySelector('.addToCollection').addEventListener('click', async (event) =>{
         event.preventDefault();
 
@@ -153,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newDropDown.value = collectionId;
             newDropDown.innerText = collectionName;
             newDropDown.classList.add('dropDownListItems')
+            newDropDown.setAttribute('id', `drop-down-${collectionId}`)
 
             collectionSelect.prepend(newDropDown)
 
