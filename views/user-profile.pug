@@ -9,7 +9,10 @@ include utils.pug
 block content
 
   div
-    h3 Your Collections
+    if locals.authenticated
+      h3 Your Collections
+    if !locals.authenticated
+      h3= `${firstName} ${lastName}'s Collections`
     div
       each collection in Collections
         div(class='collection-container')
@@ -52,14 +55,16 @@ block content
             p(id=`edits-${review.id}`)  Review: #{review.content}
             div
             p  Rating: #{review.rating}
-            div
-            button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
-            div
-            button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
-            div
-            button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
-  div.delete-profile-div
-    label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
-    form(action=`/profile/delete/${id}` method='post')
-      input(type='hidden' name='_csrf' value=csrfToken)
-      button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE
+            if locals.authenticated
+              div 
+              button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
+              div 
+              button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
+              div 
+              button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
+  if locals.authenticated
+    div.delete-profile-div
+      label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
+      form(action=`/profile/delete/${id}` method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE

@@ -20,6 +20,7 @@ h2 {
 input {
   margin: 3px;
   font-size: large;
+  width: 100%;
 }
 
 .button-div {
@@ -130,4 +131,12 @@ textarea {
 
 .center {
   align-self: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
 }

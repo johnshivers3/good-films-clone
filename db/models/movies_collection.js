@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Movies_Collection = sequelize.define('Movies_Collection', {
     movieId: {

@@ -7,6 +7,45 @@ const { asyncHandler, csrfProtection } = require("./utils");
 
 const router = express.Router();
 
+
+router.post(
+  "/:collectionId/:movieId", asyncHandler(async(req, res) => {
+
+    try {
+      await db.Movies_Collection.create({
+        movieId: req.body.movieId,
+        collectionId: req.body.collectionId
+      })
+      res.redirect(201,'back')
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+)
+
+// delete movies_Collection
+router.post(
+  "/delete/:collectionId/:collectionName/:movieId", asyncHandler(async (req, res) => {
+    console.log('in post')
+    const movies_CollectionRow = await db.Movies_Collection.findOne({
+      where: {
+        collectionId: req.params.collectionId,
+        movieId: req.params.movieId
+      }
+    })
+    console.log(movies_CollectionRow)
+    console.log('about to try to delete it')
+
+    try {
+      await movies_CollectionRow.destroy()
+      console.log('destroyed')
+      res.redirect(201, 'back')
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+)
+
 router.get(
   "/:id",
   csrfProtection,
@@ -90,6 +129,7 @@ router.post(
   })
   );
 
+
   router.post(
     '/delete/:id',
     csrfProtection,
@@ -115,7 +155,7 @@ router.post(
           collectionId,
           movieId,
         });
-        res.status(201).json({ comment: "hello" });
+
       } catch {
       throw new Error("Unable to create Movies_Collection connection!!! ");
     }

@@ -28,33 +28,37 @@ router.post(
       movieId,
       userId,
     });
-    const validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) {
-      await review.save();
-      res.status(201).json(review);
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      throw new Error(errors);
-    }
-  })
-);
+    const validatorErrors = []
+    await review.save();
+    res.status(201).json(review);
 
-router.get(
-  "/:id",
-  csrfProtection,
-  asyncHandler(async (req, res) => {
+    // if (validatorErrors.isEmpty()) {
+    // } else {
+    //     const errors = validatorErrors.array().map((error) => error.msg);
+    //     res.render('create-review', {
+    //         title: 'Create Review',
+    //         review,
+    //         errors,
+    //         csrfToken: req.csrfToken(),
+    //     });
+    // }
+}))
+
+
+router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
+    // Grab info for the movie and the list of reviews 
     const movie = await db.Movie.findOne({
       where: { id: movieId },
     });
-
     const reviews = await db.Review.findAll({
       where: { movieId },
       include: User,
     });
 
+    // Formatting reviews
     let reviewsFormatted = [];
 
     reviews.forEach((review, i) => {
@@ -65,7 +69,8 @@ router.get(
             user: `${review.User.firstName} ${review.User.lastName}`,
             date: dateFormatted,
             rating: review.rating,
-            content: review.content
+            content: review.content,
+            userId: review.User.id
         }
         reviewsFormatted.push(newReview);
 
@@ -73,19 +78,41 @@ router.get(
 
     reviewsFormatted.reverse();
 
-    const collections = await db.Collection.findAll({
-      where: {
-        userId: `${req.session.auth ? req.session.auth.userId : 0}`,
-      },
-    });
+    // Setup variables for collections 
+    let bigCollections;
+    let dropDownCollections = [];
+    let listCollections = [];
 
-    res.render("movies", {
-      movie,
-      reviewsFormatted,
-      csrfToken: req.csrfToken(),
-      collections,
-    });
-  })
-);
+    if (req.session.auth) {
+        bigCollections = await db.Collection.findAll({
+            where: {
+                userId: req.session.auth.userId,
+            }, 
+            include: db.Movie
+        })
+    
+        for (collection of bigCollections) {
+            let bool = false
+            for (movieLoop of collection.Movies) {
+                if (movieLoop.id === movie.id) {
+                    listCollections.push(collection);
+                    bool = true;
+                } 
+            }
+            if (!bool) {
+                dropDownCollections.push(collection);
+            }
+        }
+    }
+
+    res.render('movies', {
+        movie,
+        reviewsFormatted,
+        csrfToken: req.csrfToken(),
+        bigCollections,
+        dropDownCollections,
+        listCollections
+    })
+}))
 
 module.exports = router;
