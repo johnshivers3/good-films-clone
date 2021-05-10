@@ -1,41 +1,32 @@
-const express = require('express');
-const { check, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs')
-const { sequelize, Sequelize } = require('../db/models');
-const Op = Sequelize.Op
-const db = require('../db/models');
-const { csrfProtection, asyncHandler } = require('./utils');
-const { loginUser, logoutUser } = require('../auth');
+const express = require("express");
+const { check, validationResult } = require("express-validator");
 
-const reviewsRouter = require('./reviews');
+const db = require("../db/models");
+const { csrfProtection, asyncHandler } = require("./utils");
 
 const router = express.Router();
-
-// router.use('/reviews', reviewsRouter);
 
 const { User } = db;
 
 const reviewValidators = [
-    check('content')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for the content of your review'),
-        // .isLength({ min: 50 })
-        // .withMessage('First Name must not be more than 50 characters long'),
-    check('rating')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for rating')
-        // .isLength({ min: 1 , max: 5})
-        // .withMessage('Rating must be between 1 and 5')
+  check("content")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a value for the content of your review")
+    .notEmpty({ checkFalsy: true })
+    .withMessage("Please provide a value for the content of your review"),
+  check("rating").exists({ checkFalsy: true }),
 ];
 
-router.post('/reviews', asyncHandler( async (req, res) => {
-    const { content, rating, movieId, userId} = req.body;
-
+router.post(
+  "/reviews",
+  reviewValidators,
+  asyncHandler(async (req, res, next) => {
+    const { content, rating, movieId, userId } = req.body;
     const review = await db.Review.create({
-        content,
-        rating,
-        movieId,
-        userId
+      content,
+      rating,
+      movieId,
+      userId,
     });
 
     const validatorErrors = []
@@ -59,15 +50,15 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
     const movie = await db.Movie.findOne({
-        where: {id: movieId }
+      where: { id: movieId },
     });
 
     const reviews = await db.Review.findAll({
-        where: { movieId },
-        include: User
-    })
+      where: { movieId },
+      include: User,
+    });
 
-    let reviewsFormatted = []
+    let reviewsFormatted = [];
 
     reviews.forEach((review, i) => {
         const split = review.createdAt.toString().split(' ');
@@ -76,9 +67,11 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         const newReview = {
             user: `${review.User.firstName} ${review.User.lastName}`,
             date: dateFormatted,
+            rating: review.rating,
             content: review.content
         }
         reviewsFormatted.push(newReview);
+
     });
 
     reviewsFormatted.reverse();
@@ -123,11 +116,5 @@ router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
         listCollections
     })
 }))
-
-
-
-
-
-
 
 module.exports = router;

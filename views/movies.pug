@@ -1,5 +1,7 @@
 extends layout.pug
 
+include utils.pug
+
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/basic-form.css")
@@ -52,9 +54,10 @@ block content
                                 a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection!
 
         h1 Reviews
-            input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
+        +validationErrorSummary(errors)
         .body-form#reviewBox
             if locals.authenticated
+                input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
                 include create-review.pug
 
             #reviewsList
@@ -67,6 +70,9 @@ block content
                             div
                                 label Date:
                                 span= review.date
+                            div 
+                                label Rating: 
+                                span= review.rating
                         .reviewContent
                             p= review.content
 

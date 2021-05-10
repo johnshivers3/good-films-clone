@@ -58,10 +58,8 @@ router.get(
         { model: db.Review, include: db.Movie },
         { model: db.Collection, include: db.Movie },
       ],
-
     });
-
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     res.render("user-profile", {
       title: "My GoodFilms",
@@ -102,7 +100,7 @@ router.post(
       ],
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const collection = await db.Collection.build({
       name,
@@ -153,7 +151,6 @@ router.post(
       const movieId = parseInt(req.params.movieId, 10);
 
       try {
-        console.log("about to create a collection connection");
         await db.Movies_Collection.create({
           collectionId,
           movieId,
@@ -197,7 +194,7 @@ router.get(
       ],
     });
 
-    const { id, firstName, lastName, Reviews, Collections } = user.dataValues;
+    const { id, firstName, lastName, Reviews, Collections } = user;
 
     const validatorErrors = validationResult(req);
 
@@ -224,5 +221,35 @@ router.get(
     }
   })
 );
+
+router.post(
+  '/review/delete/:id',
+  asyncHandler(async (req, res) => {
+    const reviewId = parseInt(req.params.id, 10);
+    const review = await db.Review.findByPk( reviewId );
+    if(review){
+      await review.destroy();
+      res.end()
+    }
+  })
+);
+
+router.post(
+  '/review/edit/:id',
+  asyncHandler(async (req, res) => {
+    const newContent = req.body.content
+
+    const reviewId = parseInt(req.params.id, 10);
+    const review = await db.Review.findByPk( reviewId );
+    if(review){
+      await review.update({
+        content: newContent
+      }
+      );
+      res.status(201).json({ comment: "hello" })
+    }
+  })
+);
+
 
 module.exports = router;
