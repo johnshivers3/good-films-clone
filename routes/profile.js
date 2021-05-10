@@ -26,19 +26,18 @@ router.post(
 // delete movies_Collection
 router.post(
   "/delete/:collectionId/:collectionName/:movieId", asyncHandler(async (req, res) => {
-    console.log('in post')
+
     const movies_CollectionRow = await db.Movies_Collection.findOne({
       where: {
         collectionId: req.params.collectionId,
         movieId: req.params.movieId
       }
     })
-    console.log(movies_CollectionRow)
-    console.log('about to try to delete it')
+
 
     try {
       await movies_CollectionRow.destroy()
-      console.log('destroyed')
+
       res.redirect(201, 'back')
     } catch (error) {
       throw new Error(error);

@@ -27,7 +27,7 @@ router.post('/', csrfProtection, reviewValidators, asyncHandler( async (req, res
         userId
     });
 
-    console.log("THIS IS THE REVIEW",review)
+
 
     const validatorErrors = validationResult(req)
 

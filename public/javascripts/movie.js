@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            console.log('got there ')
+
 
             document.getElementById(`list-${collectionId}`).remove();
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             collectionSelect.prepend(newDropDown)
 
             const collectionListItems = document.getElementsByClassName('collectionListItems');
-            console.log(collectionListItems)
+
             if (collectionListItems.length === 0) {
                 document.getElementById('inCollectionsArea').classList.add('hidden')
             }
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             })
 
-            // add to list 
+            // add to list
             const liElements = document.getElementsByClassName('collectionListItems');
             if (liElements.length === 0) {
                 document.getElementById('inCollectionsArea').classList.add('show');
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('create-review').addEventListener('click', async (event) => {
             event.preventDefault();
 
-            console.log('in event listener')
+
 
             const rating = document.getElementById('rating').value;
             const content = document.getElementById('content')
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label>Date: </label>
                     <span>${datePlus}</span>
                 </div>
-                <div> 
+                <div>
                     <label>Rating: </label>
                     <span>${rating}</span>
                 </div>
