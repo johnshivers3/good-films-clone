@@ -9,7 +9,6 @@ append head
 include utils.pug
 
 block content
-  +validationErrorSummary(errors)
   .body-form-container
     form(action='/users/register' method='post' class='body-form')
       input(type='hidden' name='_csrf' value=csrfToken)
