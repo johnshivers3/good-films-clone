@@ -150,24 +150,10 @@ h2 {
   height: 125px;
 }
 
-img {
-  border-radius: 0.5rem;
-}
-
-div.info div {
-  margin: 15px 5px;
-}
-div.image img {
-  height: 500px;
-}
 
 .asd {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: small;
-}
-
-div.movieInfo {
-    width: 70vw;
 }
