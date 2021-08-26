@@ -1,20 +1,22 @@
-h1{
-    color: black
+h1 {
+  color: black;
 }
-
 
 .docu,
 .horror,
 .action,
 .comedy {
-    /* height: 200px; */
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 35px;
-    border: 1px solid black ;
-    border-radius: 10px;
+  /* height: 200px; */
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 35px;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 400px;
+  text-align: center;
+
 }
 
 .freeSolo,
@@ -36,11 +38,11 @@ h1{
 .Bruce,
 .rh2,
 .ted,
-.spaceBalls{
-    padding: 5px;
-    /* width: 75px; */
-    width: 80%;
-    /* height: 125px; */
+.spaceBalls {
+  padding: 5px;
+  /* width: 75px; */
+  width: 80%;
+  /* height: 125px; */
 }
 
 .freeSolo:hover,
@@ -62,23 +64,23 @@ h1{
 .Bruce:hover,
 .rh2:hover,
 .ted:hover,
-.spaceBalls:hover{
-    /* width:125px;
+.spaceBalls:hover {
+  /* width:125px;
     height:200px; */
-    width: 100%;
-    transition: 1;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  transition: 1;
+  margin: 0;
+  padding: 0;
 }
 
-.asd{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: small;
+.asd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: small;
 }
 
-h2{
-    font-weight: bold;
-    font-size: 14px;
+h2 {
+  font-weight: bold;
+  font-size: 14px;
 }
