@@ -28,7 +28,7 @@ block content
                     span=movie.actors
                 div
                     label Release Date:
-                    span=movie.releaseDate
+                    span=movie.releaseDate.toLocaleDateString()
                 div
                     label Description:
                     span=movie.description
@@ -42,7 +42,7 @@ block content
                                             option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
                                         form(action=`/${movieId}` _method='post')
                                             input(type='hidden' id='movieId' value=movie.id)
-                                            button(class='addToCollection' id=`${collection.name}`) Add to Collection
+                                            button(class='addToCollection' ) Add to Collection
                                 br
                                 #inCollectionsArea
                                     h4 In collections:

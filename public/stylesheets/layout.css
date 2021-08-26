@@ -1,76 +1,92 @@
 body {
-    background-color: rgb(192, 152, 103);
-    font-family: monospace;
-    padding: 3%;
-
+  background-color: rgb(192, 152, 103);
+  font-family: monospace;
+  padding: 3%;
 }
 
-*:not(.logoImg){
-    box-sizing: border-box;
+*:not(.logoImg) {
+  box-sizing: border-box;
 }
 
 .navbar {
-    position: static;
-    /* top: 0; */
-    width: 100%;
-    left: 0;
-    height: 100px;
-    background-color:rgb(245, 232, 215);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+  position: static;
+  /* top: 0; */
+  width: 100%;
+  left: 0;
+  height: 100px;
+  background-color: rgb(245, 232, 215);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
 .footer {
-    bottom: 0;
-    border-radius: 10px;
-    margin-top: 30px;
+  bottom: 0;
+  border-radius: 10px;
+  margin-top: 30px;
 }
 
-.loginForm{
-    padding: 15px;
-    padding-right: 25px;
-    flex-direction: column;
+.loginForm {
+  padding: 15px;
+  padding-right: 25px;
+  flex-direction: column;
 }
 .nav-login-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
-.form{
-    align-content: space-between;
+.form {
+  align-content: space-between;
 }
 
-.logoImg{
-    width: 150px;
-    height: 50px;
-    padding: 20px;
+.logoImg {
+  width: 150px;
+  height: 50px;
+  padding: 20px;
+  border-radius: 0.5rem;
 }
 
-input{
-    margin: 2px;
-    border: 1px solid rgb(223, 177, 177);
-    border-radius: 5px;
+input {
+  margin: 2px;
+  border: 1px solid rgb(223, 177, 177);
+  border-radius: 5px;
 }
 
 .loginBtn,
-.registerBtn
-{
-    margin: 2px;
-    background-color: black;
-    color: white;
-    font: 100 10px Arial;
-    border: 1px solid black;
-    border-radius: 2.5px;
+.registerBtn,
+button {
+  margin: 5px;
+  background-color: black;
+  color: white;
+  font: 100 14px monospace;
+  border: 1px solid black;
+  border-radius: 2.5px;
+  min-width: 80px;
 }
 
 .names {
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
 }
 
 .navbar {
-    border-radius: 10px;
+  border-radius: 10px;
+}
+
+img {
+  border-radius: 0.5rem;
+}
+
+div.info div {
+  margin: 15px 5px;
+}
+div.image img {
+  height: 500px;
+}
+
+div.movieInfo {
+  width: 70vw;
 }
