@@ -44,6 +44,9 @@ editBtns.forEach(button => {
             thing.append(input)
         });
 
+        const saveButton = document.getElementById(`save-${idNumber}`)
+        saveButton.classList.remove('hidden')
+
     });
 });
 
