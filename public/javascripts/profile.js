@@ -7,20 +7,20 @@ const saveBtns = document.querySelectorAll(".save-review-btn");
 
 deleteBtns.forEach(button => {
     button.addEventListener('click', async (event) => {
-    
+
         // const deleteBtn = document.getElementsByClassName("delete-review-btn")[0]
         let idNumber = event.target.id.split("-")[1]
-        
-        
+
+
         await fetch(`/profile/review/delete/${idNumber}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }  
+            }
         })
-        
+
         location.reload()
-    
+
         // const review = document.getElementById(`review-${idNumber}`)
         // review.innerHTML = ''
     });
@@ -41,7 +41,7 @@ editBtns.forEach(button => {
         input.setAttribute("id", `update-textarea-${idNumber}`)
 
         appendHere.forEach(thing => {
-            thing.append(input)  
+            thing.append(input)
         });
 
     });
@@ -49,13 +49,13 @@ editBtns.forEach(button => {
 
     saveBtns.forEach(button => {
         button.addEventListener('click', async (event) => {
-        
+
             let idNumber = event.target.id.split("-")[1]
 
             const updated = document.getElementById(`update-textarea-${idNumber}`).value
 
-            console.log(updated)
-            
+
+
             await fetch(`/profile/review/edit/${idNumber}`, {
                 method: 'POST',
                 headers: {
@@ -63,10 +63,10 @@ editBtns.forEach(button => {
                 },
                 body: JSON.stringify({
                     content: updated
-                }) 
-            }) 
+                })
+            })
             const updatedContent = document.getElementById(`edits-${idNumber}`)
-            updatedContent.innerText = "Review: " + updated 
+            updatedContent.innerText = "Review: " + updated
         });
 
     });
