@@ -47,6 +47,9 @@ editBtns.forEach(button => {
         const saveButton = document.getElementById(`save-${idNumber}`)
         saveButton.classList.remove('hidden')
 
+        const editButton = document.getElementById(`edit-${idNumber}`)
+        editButton.classList.add('hidden')
+
     });
 });
 
@@ -73,6 +76,9 @@ editBtns.forEach(button => {
 
             const saveButton = document.getElementById(`save-${idNumber}`)
             saveButton.classList.add('hidden')
+
+            const editButton = document.getElementById(`edit-${idNumber}`)
+            editButton.classList.remove('hidden')
         });
 
     });
