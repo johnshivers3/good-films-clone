@@ -70,6 +70,9 @@ editBtns.forEach(button => {
             })
             const updatedContent = document.getElementById(`edits-${idNumber}`)
             updatedContent.innerText = "Review: " + updated
+
+            const saveButton = document.getElementById(`save-${idNumber}`)
+            saveButton.classList.add('hidden')
         });
 
     });
