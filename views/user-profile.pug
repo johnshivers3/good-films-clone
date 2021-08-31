@@ -61,7 +61,7 @@ block content
               div 
               button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
               div 
-              button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
+              button(name="saveReviewBtn" class="save-review-btn hidden" id=`save-${review.id}`) Save Review
   if locals.authenticated
     div.delete-profile-div
       label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
