@@ -17,13 +17,14 @@ block content
       each collection in Collections
         div(class='collection-container')
           h2 #{collection.dataValues.name}
-            div.edit-collection
-              form(action=`/profile/collection/edit/${collection.id}` _method='post')
-                input(type="text", name="name" placeholder="Rename this collection")
-                button(type='submit' class='renameCol') Rename
-              form(action=`/profile/collection/delete/${collection.id}` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                button(type='submit' class='deleteCol') Delete
+            if locals.authenticated
+              div.edit-collection
+                form(action=`/profile/collection/edit/${collection.id}` _method='post')
+                  input(type="text", name="name" placeholder="Rename this collection")
+                  button(type='submit' class='renameCol') Rename
+                form(action=`/profile/collection/delete/${collection.id}` method='post')
+                  input(type='hidden' name='_csrf' value=csrfToken)
+                  button(type='submit' class='deleteCol') Delete
           div(class="docu")
             if collection.Movies
               each movie in collection.Movies
