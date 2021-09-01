@@ -52,7 +52,8 @@ block content
             img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content
             h4 Title: #{review.Movie.title}
-            p(id=`edits-${review.id}`)  Review: #{review.content}
+            p(id=`edits-${review.id}`)  Review: 
+              span(id=`edits-content-${review.id}`) #{review.content}
             div
             p  Rating: #{review.rating}
             if locals.authenticated

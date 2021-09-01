@@ -33,16 +33,25 @@ editBtns.forEach(button => {
         let idNumber = event.target.id.split("-")[1]
 
 
-        const appendHere = document.querySelectorAll(`#edits-${idNumber}`)
+        const appendHere = document.getElementById(`edits-${idNumber}`)
+        const innerHere = document.getElementById(`edits-${idNumber}`)
+
+        console.log(appendHere)
         let val = event.target.value
 
         input.setAttribute("type", "textarea")
         input.setAttribute("value", `${val}`)
         input.setAttribute("id", `update-textarea-${idNumber}`)
 
-        appendHere.forEach(thing => {
-            thing.append(input)
-        });
+        // appendHere.forEach(thing => {
+        //     thing.append(input)
+        // });
+
+        // const test = 
+
+        appendHere.innerText = 'Review: '
+        appendHere.append(input)
+
 
         const saveButton = document.getElementById(`save-${idNumber}`)
         saveButton.classList.remove('hidden')
