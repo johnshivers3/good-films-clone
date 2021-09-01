@@ -28,20 +28,19 @@ deleteBtns.forEach(button => {
 
 editBtns.forEach(button => {
     button.addEventListener('click', (event) => {
-        const input = document.createElement('input')
 
         let idNumber = event.target.id.split("-")[1]
 
+        const input = document.getElementById(`edits-input-${idNumber}`)
 
         const appendHere = document.getElementById(`edits-${idNumber}`)
-        const innerHere = document.getElementById(`edits-${idNumber}`)
+        const innerSpan = document.getElementById(`edits-content-${idNumber}`)
 
-        console.log(appendHere)
-        let val = event.target.value
+        // let val = event.target.value
 
-        input.setAttribute("type", "textarea")
-        input.setAttribute("value", `${val}`)
-        input.setAttribute("id", `update-textarea-${idNumber}`)
+        // input.setAttribute("type", "textarea")
+        // input.setAttribute("value", `${val}`)
+        // input.setAttribute("id", `update-textarea-${idNumber}`)
 
         // appendHere.forEach(thing => {
         //     thing.append(input)
@@ -49,8 +48,8 @@ editBtns.forEach(button => {
 
         // const test = 
 
-        appendHere.innerText = 'Review: '
-        appendHere.append(input)
+        innerSpan.classList.add('hidden')
+        input.classList.remove('hidden')
 
 
         const saveButton = document.getElementById(`save-${idNumber}`)
@@ -64,11 +63,12 @@ editBtns.forEach(button => {
 
     saveBtns.forEach(button => {
         button.addEventListener('click', async (event) => {
-
             let idNumber = event.target.id.split("-")[1]
 
-            const updated = document.getElementById(`update-textarea-${idNumber}`).value
+            const input = document.getElementById(`edits-input-${idNumber}`)
 
+
+            const updated = input.value
 
 
             await fetch(`/profile/review/edit/${idNumber}`, {
@@ -80,8 +80,12 @@ editBtns.forEach(button => {
                     content: updated
                 })
             })
-            const updatedContent = document.getElementById(`edits-${idNumber}`)
-            updatedContent.innerText = "Review: " + updated
+
+            const updatedContent = document.getElementById(`edits-content-${idNumber}`)
+            updatedContent.innerText = updated
+            updatedContent.classList.remove('hidden')
+
+            input.classList.add('hidden')
 
             const saveButton = document.getElementById(`save-${idNumber}`)
             saveButton.classList.add('hidden')

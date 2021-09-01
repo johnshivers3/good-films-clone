@@ -54,6 +54,7 @@ block content
             h4 Title: #{review.Movie.title}
             p(id=`edits-${review.id}`)  Review: 
               span(id=`edits-content-${review.id}`) #{review.content}
+              input(id=`edits-input-${review.id}` class='hidden' value=`${review.content}`)
             div
             p  Rating: #{review.rating}
             if locals.authenticated
