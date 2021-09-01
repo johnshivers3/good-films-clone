@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event)=>{
   const demoButton = document.getElementById('demo-user');
   if (demoButton) {
     demoButton.addEventListener('click', async (event) => {
-      event.preventDefault()
+      // event.preventDefault()
 
       const token = document.getElementById('csrf').value
 
@@ -17,6 +17,8 @@ window.addEventListener("DOMContentLoaded", (event)=>{
           _csrf: token
         })
       })
+
+      window.location = '/'
       
     })
 
