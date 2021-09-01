@@ -34,15 +34,16 @@ block content
                     img(src=movie.image alt=movie.title class="movies")
     div
       +validationErrorSummary(errors)
-      .collection-form-container
-        form(action=`/profile/${id}` method='post' class='collection-form')
-          div
-            h4.create-collection-label= `Create a new Collection`
-            input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            input(type='hidden' name='userId' value=userId)
-          div
-            button(type='submit') Create Collection
+      if locals.authenticated
+        .collection-form-container
+          form(action=`/profile/${id}` method='post' class='collection-form')
+            div
+              h4.create-collection-label= `Create a new Collection`
+              input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              input(type='hidden' name='userId' value=userId)
+            div
+              button(type='submit') Create Collection
   div
     h3 Recent Reviews
     div
