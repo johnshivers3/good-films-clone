@@ -29,17 +29,13 @@ html
           span.nav-login-container
             div
               form(action='/users/login' method='post' class='loginForm')
-                input(type='hidden' name='_csrf' value=csrfToken)
+                input(type='hidden' name='_csrf' value=csrfToken id='csrf')
                 +field('Email Address', 'emailAddress', emailAddress)
                 +field('Password', 'password', null, 'password')
                 button(type='submit' class='loginBtn') Login
                 span
                   button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
-              form(action='/users/login' method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                input(type='hidden' name='emailAddress' value='demo@demo.com')
-                input(type='hidden' name='password' value='password')
-                button(type='submit')
+                button(id='demo-user') Demo User
     div
       div
         +validationErrorSummary(errors)
