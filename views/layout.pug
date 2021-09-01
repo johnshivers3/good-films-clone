@@ -35,6 +35,11 @@ html
                 button(type='submit' class='loginBtn') Login
                 span
                   button(class= 'registerBtn' type='button' onclick="window.location='/users/register'" ) Register
+              form(action='/users/login' method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                input(type='hidden' name='emailAddress' value='demo@demo.com')
+                input(type='hidden' name='password' value='password')
+                button(type='submit')
     div
       div
         +validationErrorSummary(errors)
