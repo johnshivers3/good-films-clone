@@ -49,9 +49,6 @@ router.post(
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
-    console.log('AaAaaaaaaaaaaaaaaaaaaaaaaaaaaa', movieId)
-    console.log(Number('3$'))
-
     if (Number(movieId) == NaN) {
       res.render('movies', {
         movie: []

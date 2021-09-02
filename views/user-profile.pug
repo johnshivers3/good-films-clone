@@ -7,68 +7,71 @@ append head
 include utils.pug
 
 block content
-
-  div
-    if locals.authenticated && locals.user.id == id
-      h3 Your Collections 
-    if locals.authenticated && locals.user.id != id
-      h3= `${firstName} ${lastName}'s Collections`
+  if !profile
+    .no-user 
+      h2 Sorry there is no such user :(
+  if profile 
     div
-      each collection in Collections
-        div(class='collection-container')
-          h2 #{collection.dataValues.name}
-            if locals.authenticated && locals.user.id == id
-              div.edit-collection
-                form(action=`/profile/collection/edit/${collection.id}` _method='post')
-                  input(type="text", name="name" placeholder="Rename this collection")
-                  button(type='submit' class='renameCol') Rename
-                form(action=`/profile/collection/delete/${collection.id}` method='post')
-                  input(type='hidden' name='_csrf' value=csrfToken)
-                  button(type='submit' class='deleteCol') Delete
-          div(class="docu")
-            if collection.Movies
-              each movie in collection.Movies
-                div(class='asd')
-                  h2=movie.title
-                  a(href=`/movies/${movie.id}`)
-                    img(src=movie.image alt=movie.title class="movies")
-    div
-      +validationErrorSummary(errors)
       if locals.authenticated && locals.user.id == id
-        .collection-form-container
-          form(action=`/profile/${id}` method='post' class='collection-form')
-            div
-              h4.create-collection-label= `Create a new Collection`
-              input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
-              input(type='hidden' name='_csrf' value=csrfToken)
-              input(type='hidden' name='userId' value=userId)
-            div
-              button(type='submit') Create Collection
-  div
-    h3 Recent Reviews
+        h3 Your Collections 
+      if locals.authenticated && locals.user.id != id
+        h3= `${firstName} ${lastName}'s Collections`
+      div
+        each collection in Collections
+          div(class='collection-container')
+            h2 #{collection.dataValues.name}
+              if locals.authenticated && locals.user.id == id
+                div.edit-collection
+                  form(action=`/profile/collection/edit/${collection.id}` _method='post')
+                    input(type="text", name="name" placeholder="Rename this collection")
+                    button(type='submit' class='renameCol') Rename
+                  form(action=`/profile/collection/delete/${collection.id}` method='post')
+                    input(type='hidden' name='_csrf' value=csrfToken)
+                    button(type='submit' class='deleteCol') Delete
+            div(class="docu")
+              if collection.Movies
+                each movie in collection.Movies
+                  div(class='asd')
+                    h2=movie.title
+                    a(href=`/movies/${movie.id}`)
+                      img(src=movie.image alt=movie.title class="movies")
+      div
+        +validationErrorSummary(errors)
+        if locals.authenticated && locals.user.id == id
+          .collection-form-container
+            form(action=`/profile/${id}` method='post' class='collection-form')
+              div
+                h4.create-collection-label= `Create a new Collection`
+                input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                input(type='hidden' name='userId' value=userId)
+              div
+                button(type='submit') Create Collection
     div
-      each review in Reviews
-        div(id=`review-${review.id}` class='review')
-          input(type="hidden" value=review.id class="reviewIddd" id=`id-${review.id}`)
-          div
-            img( class='review_image' src=review.Movie.image alt=review.Movie.title)
-          div.review_content
-            h4 Title: #{review.Movie.title}
-            p(id=`edits-${review.id}`)  Review: 
-              span(id=`edits-content-${review.id}`) #{review.content}
-              input(id=`edits-input-${review.id}` class='hidden' value=`${review.content}`)
+      h3 Recent Reviews
+      div
+        each review in Reviews
+          div(id=`review-${review.id}` class='review')
+            input(type="hidden" value=review.id class="reviewIddd" id=`id-${review.id}`)
             div
-            p  Rating: #{review.rating}
-            if locals.authenticated
-              div 
-              button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
-              div 
-              button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
-              div 
-              button(name="saveReviewBtn" class="save-review-btn hidden" id=`save-${review.id}`) Save Review
-  if locals.authenticated && locals.user.id == id
-    div.delete-profile-div
-      label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
-      form(action=`/profile/delete/${id}` method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE
+              img( class='review_image' src=review.Movie.image alt=review.Movie.title)
+            div.review_content
+              h4 Title: #{review.Movie.title}
+              p(id=`edits-${review.id}`)  Review: 
+                span(id=`edits-content-${review.id}`) #{review.content}
+                input(id=`edits-input-${review.id}` class='hidden' value=`${review.content}`)
+              div
+              p  Rating: #{review.rating}
+              if locals.authenticated
+                div 
+                button(name="deleteReviewBtn" class="delete-review-btn" id=`delete-${review.id}`) Delete Review
+                div 
+                button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
+                div 
+                button(name="saveReviewBtn" class="save-review-btn hidden" id=`save-${review.id}`) Save Review
+    if locals.authenticated && locals.user.id == id
+      div.delete-profile-div
+        label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
+        form(action=`/profile/delete/${id}` method='post')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          button(type='submit' name='deleteProfileBtn' class='delete-profile-btn') DELETE YOUR PROFILE
