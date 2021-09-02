@@ -5,84 +5,88 @@ include utils.pug
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/basic-form.css")
+  link(rel="stylesheet" href="/stylesheets/movie.css")
   script(src='/javascripts/movie.js' type="module")
 block content
+    if !movie
+        .no-movie
+            h2 Sorry this movie isn't in our database :(
+    if movie
+        .body-form-container
+            .body-form.movieInfo
+                div.image
+                    span
+                        img(src=movie.image, alt=movie.title)
+                div.info
+                    div
+                        label Movie:
+                        span=movie.title
+                    div
+                        label Genre:
+                        span=movie.genre
+                    div
+                        label Directors:
+                        span=movie.directors
+                    div
+                        label Actors:
+                        span=movie.actors
+                    div
+                        label Release Date:
+                        span=movie.releaseDate.toLocaleDateString()
+                    div
+                        label Description:
+                        span=movie.description
+                    if locals.authenticated
+                        div#addToCollectionsDiv
+                            form
+                                if bigCollections
+                                    #addArea
+                                        select#collectionSelect
+                                            each collection in dropDownCollections
+                                                option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
+                                            form(action=`/${movieId}` _method='post')
+                                                input(type='hidden' id='movieId' value=movie.id)
+                                                button(class='addToCollection' ) Add to Collection
+                                    br
+                                    #inCollectionsArea
+                                        h4 In collections:
+                                            ul#collectionList
+                                                each collection in listCollections
+                                                    li(id=`list-${collection.id}` class='collectionListItems')= collection.name
+                                                        button(id=`${collection.id}/${collection.name}/${movie.id}` class='delete') Remove
+                                if !bigCollections
+                                    a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection!
 
-    .body-form-container
-        .body-form.movieInfo
-            div.image
-                span
-                    img(src=movie.image, alt=movie.title)
-            div.info
-                div
-                    label Movie:
-                    span=movie.title
-                div
-                    label Genre:
-                    span=movie.genre
-                div
-                    label Directors:
-                    span=movie.directors
-                div
-                    label Actors:
-                    span=movie.actors
-                div
-                    label Release Date:
-                    span=movie.releaseDate.toLocaleDateString()
-                div
-                    label Description:
-                    span=movie.description
+            h1 Reviews
+            +validationErrorSummary(errors)
+            .body-form#reviewBox
+                h4 Create a new Review:
                 if locals.authenticated
-                    div#addToCollectionsDiv
-                        form
-                            if bigCollections
-                                #addArea
-                                    select#collectionSelect
-                                        each collection in dropDownCollections
-                                            option(name='current' value=collection.id class='dropDownListItems' id=`drop-down-${collection.id}`)= collection.name
-                                        form(action=`/${movieId}` _method='post')
-                                            input(type='hidden' id='movieId' value=movie.id)
-                                            button(class='addToCollection' ) Add to Collection
-                                br
-                                #inCollectionsArea
-                                    h4 In collections:
-                                        ul#collectionList
-                                            each collection in listCollections
-                                                li(id=`list-${collection.id}` class='collectionListItems')= collection.name
-                                                    button(id=`${collection.id}/${collection.name}/${movie.id}` class='delete') Remove
-                            if !bigCollections
-                                a(href=`/profile/${locals.user.id}`) Go to your profile page to make a new Collection!
+                    input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
+                    include create-review.pug
+                if !locals.authenticated
+                    p Make an account to add your own reviews!
 
-        h1 Reviews
-        +validationErrorSummary(errors)
-        .body-form#reviewBox
-            h4 Create a new Review:
-            if locals.authenticated
-                input(type='hidden' value=`${locals.user.firstName} ${locals.user.lastName}` id='userName')
-                include create-review.pug
-            if !locals.authenticated
-                p Make an account to add your own reviews!
-
-            #reviewsList
-            h4 Check out recent Reviews:
-                if reviewsFormatted
-                    each review in reviewsFormatted
-                        .movieInfo.review-area
-                            .userAndDate
-                                div
-                                    label User:
-                                    a(href=`/profile/${review.userId}`)
-                                        span= review.user
-                                div
-                                    label Date:
-                                    span= review.date
-                                div
-                                    label Rating:
-                                    span= review.rating
-                            .reviewContent
-                                p= review.content
-            if reviewsFormatted.length === 0
-                p No one has reviewed this movie yet :(
+                #reviewsList
+                h4 Check out recent Reviews:
+                    if reviewsFormatted
+                        each review in reviewsFormatted
+                            .movieInfo.review-area
+                                .userAndDate
+                                    div
+                                        label User:
+                                        a(href=`/profile/${review.userId}`)
+                                            span= review.user
+                                    div
+                                        label Date:
+                                        span= review.date
+                                    div
+                                        label Rating:
+                                        span= review.rating
+                                .reviewContent
+                                    p= review.content
+                if reviewsFormatted.length === 0
+                    p No one has reviewed this movie yet :(
 
 
 
