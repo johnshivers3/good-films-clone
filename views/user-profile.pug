@@ -9,15 +9,15 @@ include utils.pug
 block content
 
   div
-    if locals.authenticated
-      h3 Your Collections
-    if !locals.authenticated
+    if locals.user.id == id
+      h3 Your Collections 
+    if locals.user.id != id
       h3= `${firstName} ${lastName}'s Collections`
     div
       each collection in Collections
         div(class='collection-container')
           h2 #{collection.dataValues.name}
-            if locals.authenticated
+            if locals.user.id == id
               div.edit-collection
                 form(action=`/profile/collection/edit/${collection.id}` _method='post')
                   input(type="text", name="name" placeholder="Rename this collection")
@@ -34,7 +34,7 @@ block content
                     img(src=movie.image alt=movie.title class="movies")
     div
       +validationErrorSummary(errors)
-      if locals.authenticated
+      if locals.user.id == id
         .collection-form-container
           form(action=`/profile/${id}` method='post' class='collection-form')
             div
@@ -66,7 +66,7 @@ block content
               button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
               div 
               button(name="saveReviewBtn" class="save-review-btn hidden" id=`save-${review.id}`) Save Review
-  if locals.authenticated
+  if locals.user.id == id
     div.delete-profile-div
       label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
       form(action=`/profile/delete/${id}` method='post')
