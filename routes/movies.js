@@ -49,70 +49,83 @@ router.post(
 router.get('/:id', csrfProtection, asyncHandler( async (req, res) => {
     const movieId = parseInt(req.params.id, 10);
 
-    // Grab info for the movie and the list of reviews 
-    const movie = await db.Movie.findOne({
-      where: { id: movieId },
-    });
-    const reviews = await db.Review.findAll({
-      where: { movieId },
-      include: User,
-    });
+    console.log('AaAaaaaaaaaaaaaaaaaaaaaaaaaaaa', movieId)
+    console.log(Number('3$'))
 
-    // Formatting reviews
-    let reviewsFormatted = [];
-
-    reviews.forEach((review, i) => {
-        const split = review.createdAt.toString().split(' ');
-        const dateFormatted = `${split[0]} ${split[1]} ${split[2]} ${split[3]}`
-
-        const newReview = {
-            user: `${review.User.firstName} ${review.User.lastName}`,
-            date: dateFormatted,
-            rating: review.rating,
-            content: review.content,
-            userId: review.User.id
-        }
-        reviewsFormatted.push(newReview);
-
-    });
-
-    reviewsFormatted.reverse();
-
-    // Setup variables for collections 
-    let bigCollections;
-    let dropDownCollections = [];
-    let listCollections = [];
-
-    if (req.session.auth) {
-        bigCollections = await db.Collection.findAll({
-            where: {
-                userId: req.session.auth.userId,
-            }, 
-            include: db.Movie
-        })
-    
-        for (collection of bigCollections) {
-            let bool = false
-            for (movieLoop of collection.Movies) {
-                if (movieLoop.id === movie.id) {
-                    listCollections.push(collection);
-                    bool = true;
-                } 
-            }
-            if (!bool) {
-                dropDownCollections.push(collection);
-            }
-        }
+    if (Number(movieId) == NaN) {
+      res.render('movies', {
+        movie: []
+      })
     }
 
-    res.render('movies', {
-        movie,
-        reviewsFormatted,
-        csrfToken: req.csrfToken(),
-        bigCollections,
-        dropDownCollections,
-        listCollections
-    })
+    else {
+
+        // Grab info for the movie and the list of reviews 
+        const movie = await db.Movie.findOne({
+          where: { id: movieId },
+        });
+        const reviews = await db.Review.findAll({
+          where: { movieId },
+          include: User,
+        });
+
+        // Formatting reviews
+        let reviewsFormatted = [];
+
+        reviews.forEach((review, i) => {
+            const split = review.createdAt.toString().split(' ');
+            const dateFormatted = `${split[0]} ${split[1]} ${split[2]} ${split[3]}`
+
+            const newReview = {
+                user: `${review.User.firstName} ${review.User.lastName}`,
+                date: dateFormatted,
+                rating: review.rating,
+                content: review.content,
+                userId: review.User.id
+            }
+            reviewsFormatted.push(newReview);
+
+        });
+
+        reviewsFormatted.reverse();
+
+        // Setup variables for collections 
+        let bigCollections;
+        let dropDownCollections = [];
+        let listCollections = [];
+
+        if (req.session.auth) {
+            bigCollections = await db.Collection.findAll({
+                where: {
+                    userId: req.session.auth.userId,
+                }, 
+                include: db.Movie
+            })
+        
+            for (collection of bigCollections) {
+                let bool = false
+                for (movieLoop of collection.Movies) {
+                    if (movieLoop.id === movie.id) {
+                        listCollections.push(collection);
+                        bool = true;
+                    } 
+                }
+                if (!bool) {
+                    dropDownCollections.push(collection);
+                }
+            }
+        }
+
+        res.render('movies', {
+            movie,
+            reviewsFormatted,
+            csrfToken: req.csrfToken(),
+            bigCollections,
+            dropDownCollections,
+            listCollections
+        })
+    }
+
 }))
 
 module.exports = router;
