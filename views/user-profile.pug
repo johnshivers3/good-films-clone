@@ -17,13 +17,14 @@ block content
       each collection in Collections
         div(class='collection-container')
           h2 #{collection.dataValues.name}
-            div.edit-collection
-              form(action=`/profile/collection/edit/${collection.id}` _method='post')
-                input(type="text", name="name" placeholder="Rename this collection")
-                button(type='submit' class='renameCol') Rename
-              form(action=`/profile/collection/delete/${collection.id}` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                button(type='submit' class='deleteCol') Delete
+            if locals.authenticated
+              div.edit-collection
+                form(action=`/profile/collection/edit/${collection.id}` _method='post')
+                  input(type="text", name="name" placeholder="Rename this collection")
+                  button(type='submit' class='renameCol') Rename
+                form(action=`/profile/collection/delete/${collection.id}` method='post')
+                  input(type='hidden' name='_csrf' value=csrfToken)
+                  button(type='submit' class='deleteCol') Delete
           div(class="docu")
             if collection.Movies
               each movie in collection.Movies
@@ -33,15 +34,16 @@ block content
                     img(src=movie.image alt=movie.title class="movies")
     div
       +validationErrorSummary(errors)
-      .collection-form-container
-        form(action=`/profile/${id}` method='post' class='collection-form')
-          div
-            h4.create-collection-label= `Create a new Collection`
-            input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            input(type='hidden' name='userId' value=userId)
-          div
-            button(type='submit') Create Collection
+      if locals.authenticated
+        .collection-form-container
+          form(action=`/profile/${id}` method='post' class='collection-form')
+            div
+              h4.create-collection-label= `Create a new Collection`
+              input.rename-input(type="text" name='name' value="" placeholder='Name your collection here')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              input(type='hidden' name='userId' value=userId)
+            div
+              button(type='submit') Create Collection
   div
     h3 Recent Reviews
     div
