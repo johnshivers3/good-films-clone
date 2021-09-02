@@ -52,7 +52,9 @@ block content
             img( class='review_image' src=review.Movie.image alt=review.Movie.title)
           div.review_content
             h4 Title: #{review.Movie.title}
-            p(id=`edits-${review.id}`)  Review: #{review.content}
+            p(id=`edits-${review.id}`)  Review: 
+              span(id=`edits-content-${review.id}`) #{review.content}
+              input(id=`edits-input-${review.id}` class='hidden' value=`${review.content}`)
             div
             p  Rating: #{review.rating}
             if locals.authenticated
@@ -61,7 +63,7 @@ block content
               div 
               button(name="editReviewBtn" class="edit-review-btn" id=`edit-${review.id}` value=`${review.content}`) Edit Review
               div 
-              button(name="saveReviewBtn" class="save-review-btn" id=`save-${review.id}`) Save Review
+              button(name="saveReviewBtn" class="save-review-btn hidden" id=`save-${review.id}`) Save Review
   if locals.authenticated
     div.delete-profile-div
       label(for="deleteProfileBtn") WARNING: Clicking 'DELETE YOUR PROFILE' will remove your profile from GoodFilms!
