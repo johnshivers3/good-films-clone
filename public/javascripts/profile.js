@@ -1,65 +1,65 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 
-const deleteBtns = document.querySelectorAll(".delete-review-btn");
-const editBtns = document.querySelectorAll(".edit-review-btn");
-const saveBtns = document.querySelectorAll(".save-review-btn");
+    const deleteBtns = document.querySelectorAll(".delete-review-btn");
+    const editBtns = document.querySelectorAll(".edit-review-btn");
+    const saveBtns = document.querySelectorAll(".save-review-btn");
 
-deleteBtns.forEach(button => {
-    button.addEventListener('click', async (event) => {
+    deleteBtns.forEach(button => {
+        button.addEventListener('click', async (event) => {
 
-        // const deleteBtn = document.getElementsByClassName("delete-review-btn")[0]
-        let idNumber = event.target.id.split("-")[1]
+            // const deleteBtn = document.getElementsByClassName("delete-review-btn")[0]
+            let idNumber = event.target.id.split("-")[1]
 
 
-        await fetch(`/profile/review/delete/${idNumber}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+            await fetch(`/profile/review/delete/${idNumber}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
 
-        location.reload()
+            location.reload()
 
-        // const review = document.getElementById(`review-${idNumber}`)
-        // review.innerHTML = ''
+            // const review = document.getElementById(`review-${idNumber}`)
+            // review.innerHTML = ''
+        });
     });
-});
 
-editBtns.forEach(button => {
-    button.addEventListener('click', (event) => {
+    editBtns.forEach(button => {
+        button.addEventListener('click', (event) => {
 
-        let idNumber = event.target.id.split("-")[1]
+            let idNumber = event.target.id.split("-")[1]
 
-        const input = document.getElementById(`edits-input-${idNumber}`)
+            const input = document.getElementById(`edits-input-${idNumber}`)
 
-        const appendHere = document.getElementById(`edits-${idNumber}`)
-        const innerSpan = document.getElementById(`edits-content-${idNumber}`)
+            const appendHere = document.getElementById(`edits-${idNumber}`)
+            const innerSpan = document.getElementById(`edits-content-${idNumber}`)
 
-        // let val = event.target.value
+            // let val = event.target.value
 
-        // input.setAttribute("type", "textarea")
-        // input.setAttribute("value", `${val}`)
-        // input.setAttribute("id", `update-textarea-${idNumber}`)
+            // input.setAttribute("type", "textarea")
+            // input.setAttribute("value", `${val}`)
+            // input.setAttribute("id", `update-textarea-${idNumber}`)
 
-        // appendHere.forEach(thing => {
-        //     thing.append(input)
-        // });
+            // appendHere.forEach(thing => {
+            //     thing.append(input)
+            // });
 
-        // const test = 
+            // const test = 
 
-        innerSpan.classList.add('hidden')
-        input.classList.remove('hidden')
+            innerSpan.classList.add('hidden')
+            input.classList.remove('hidden')
 
 
-        const saveButton = document.getElementById(`save-${idNumber}`)
-        saveButton.classList.remove('hidden')
+            const saveButton = document.getElementById(`save-${idNumber}`)
+            saveButton.classList.remove('hidden')
 
-        const editButton = document.getElementById(`edit-${idNumber}`)
-        editButton.classList.add('hidden')
+            const editButton = document.getElementById(`edit-${idNumber}`)
+            editButton.classList.add('hidden')
 
+        });
     });
-});
 
     saveBtns.forEach(button => {
         button.addEventListener('click', async (event) => {

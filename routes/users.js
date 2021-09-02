@@ -114,6 +114,8 @@ router.post('/login', csrfProtection, loginValidators,
       password,
     } = req.body;
 
+    console.log("Am I even here? ")
+
     let errors = [];
     const validatorErrors = validationResult(req);
 
@@ -130,6 +132,7 @@ router.post('/login', csrfProtection, loginValidators,
           // If the password hashes match, then login the user
           // and redirect them to the default route.
           await loginUser(req, res, user);
+          console.log('---------------------what about here? --------------------')
           return req.session.save(() => res.redirect("/"))
         }
       }

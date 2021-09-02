@@ -13,7 +13,7 @@ body {
   /* top: 0; */
   width: 100%;
   left: 0;
-  height: 100px;
+  /* height: ; */
   background-color: rgb(245, 232, 215);
   display: flex;
   justify-content: space-between;
@@ -32,18 +32,19 @@ body {
   padding-right: 25px;
   flex-direction: column;
 }
-.nav-login-container {
+
+/* .nav-login-container {
   display: flex;
   flex-direction: row;
-}
+} */
 
 .form {
   align-content: space-between;
 }
 
 .logoImg {
-  width: 150px;
-  height: 50px;
+  width: 250px;
+  height: 100px;
   padding: 20px;
   border-radius: 0.5rem;
 }
@@ -89,4 +90,16 @@ div.image img {
 
 div.movieInfo {
   width: 70vw;
+}
+
+/* Demo User */
+
+#demo-user {
+  height: 100%;
+}
+
+.form-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
