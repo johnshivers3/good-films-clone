@@ -50,26 +50,45 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
-    const collection = db.Collection.build();
-    const user = await db.User.findOne({
-      where: { id: userId },
-      include: [
-        { model: db.Review, include: db.Movie },
-        { model: db.Collection, include: db.Movie },
-      ],
-    });
-    const { id, firstName, lastName, Reviews, Collections } = user;
 
-    res.render("user-profile", {
-      title: "My GoodFilms",
-      id,
-      firstName,
-      lastName,
-      Reviews,
-      Collections,
-      csrfToken: req.csrfToken(),
-      collection,
-    });
+    if (Number(userId) == NaN) {
+      res.render("user-profile", {
+        title: "My GoodFilms",
+        profile: false,
+      });
+    }
+    else {
+      const collection = db.Collection.build();
+      const user = await db.User.findOne({
+        where: { id: userId },
+        include: [
+          { model: db.Review, include: db.Movie },
+          { model: db.Collection, include: db.Movie },
+        ],
+      });
+      if (user) {
+        const { id, firstName, lastName, Reviews, Collections } = user;
+
+        res.render("user-profile", {
+          title: "My GoodFilms",
+          id,
+          firstName,
+          lastName,
+          Reviews,
+          Collections,
+          csrfToken: req.csrfToken(),
+          collection,
+          profile: true,
+        });
+      } else {
+        res.render("user-profile", {
+          title: "My GoodFilms",
+          profile: false,
+        });
+      }
+
+    }
+
   })
 );
 
