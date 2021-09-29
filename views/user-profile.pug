@@ -23,8 +23,9 @@ block content
               if locals.authenticated && locals.user.id == id
                 div.edit-collection
                   form(action=`/profile/collection/edit/${collection.id}` _method='post')
-                    input(type="text", name="name" placeholder="Rename this collection")
-                    button(type='submit' class='renameCol') Rename
+                    input(type="text" id=`rename-input-${collection.id}` class='hidden' name="name" placeholder="Rename this collection")
+                    button(id=`rename-${collection.id}` class='rename-buttons') Rename
+                    button(type='submit' id=`rename-save-${collection.id}` class='renameCol hidden') Save Name
                   form(action=`/profile/collection/delete/${collection.id}` method='post')
                     input(type='hidden' name='_csrf' value=csrfToken)
                     button(type='submit' class='deleteCol') Delete

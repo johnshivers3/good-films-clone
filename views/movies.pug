@@ -13,7 +13,7 @@ block content
             h2 Sorry this movie isn't in our database :(
     if movie
         .body-form-container
-            .body-form.movieInfo
+            .body-form.movieInfo.main
                 div.image
                     span
                         img(src=movie.image, alt=movie.title)
@@ -67,8 +67,8 @@ block content
                 if !locals.authenticated
                     p Make an account to add your own reviews!
 
-                #reviewsList
                 h4 Check out recent Reviews:
+                #reviewsList
                     if reviewsFormatted
                         each review in reviewsFormatted
                             .movieInfo.review-area

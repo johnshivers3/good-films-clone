@@ -96,7 +96,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // Buttons for Collection Renaming
 
+    const renameButtons = document.querySelectorAll('.rename-buttons');
+
+    renameButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.preventDefault()
+            let idNumber = event.target.id.split("-")[1]
+
+            const saveButton = document.getElementById(`rename-save-${idNumber}`)
+            const input = document.getElementById(`rename-input-${idNumber}`)
+
+            button.classList.add('hidden')
+            saveButton.classList.remove('hidden')
+            input.classList.remove('hidden')
+        })
+    })
 
 
 
